@@ -33,6 +33,8 @@
         "otherModules": [],
         "enableTranslation": true,
         "nativeLanguage": "fr",
-        "languages": ["fr", "en"]
+        "languages": ["fr", "en"],
+        "herokuAppName": "conference-management-full",
+        "herokuDeployType": "git"
     }
 }
