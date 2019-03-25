@@ -1,0 +1,38 @@
+{
+    "generator-jhipster": {
+        "promptValues": {
+            "packageName": "com.conference.management",
+            "nativeLanguage": "fr"
+        },
+        "jhipsterVersion": "5.8.2",
+        "applicationType": "monolith",
+        "baseName": "ConferenceManagement",
+        "packageName": "com.conference.management",
+        "packageFolder": "com/conference/management",
+        "serverPort": "8080",
+        "authenticationType": "jwt",
+        "cacheProvider": "ehcache",
+        "enableHibernateCache": true,
+        "websocket": false,
+        "databaseType": "sql",
+        "devDatabaseType": "h2Disk",
+        "prodDatabaseType": "postgresql",
+        "searchEngine": false,
+        "messageBroker": false,
+        "serviceDiscoveryType": false,
+        "buildTool": "maven",
+        "enableSwaggerCodegen": false,
+        "jwtSecretKey": "ZjkwZDg0MDRjMjJmZjIxODI0ODYyZjgzMzU1NjNmZjRkOTExMTdjYTQ0ZWI0OGQ4MzI4ZWU4ZmRlZjU1NTZhM2ZiMmJlNWZhOTllMTdlZDE2ODM1Y2EzZTczYWIxZGQ0NTc0NjA1ODFjZDcyMjhlODAwYjljY2YwZjY1NDk2YzI=",
+        "clientFramework": "angularX",
+        "useSass": true,
+        "clientPackageManager": "yarn",
+        "testFrameworks": ["gatling", "protractor"],
+        "jhiPrefix": "jhi",
+        "entitySuffix": "",
+        "dtoSuffix": "DTO",
+        "otherModules": [],
+        "enableTranslation": true,
+        "nativeLanguage": "fr",
+        "languages": ["fr", "en"]
+    }
+}
