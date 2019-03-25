@@ -38,6 +38,27 @@ public class CacheConfiguration {
             cm.createCache(com.conference.management.domain.User.class.getName(), jcacheConfiguration);
             cm.createCache(com.conference.management.domain.Authority.class.getName(), jcacheConfiguration);
             cm.createCache(com.conference.management.domain.User.class.getName() + ".authorities", jcacheConfiguration);
+            cm.createCache(com.conference.management.domain.Country.class.getName(), jcacheConfiguration);
+            cm.createCache(com.conference.management.domain.Country.class.getName() + ".cities", jcacheConfiguration);
+            cm.createCache(com.conference.management.domain.City.class.getName(), jcacheConfiguration);
+            cm.createCache(com.conference.management.domain.City.class.getName() + ".hotels", jcacheConfiguration);
+            cm.createCache(com.conference.management.domain.Hotel.class.getName(), jcacheConfiguration);
+            cm.createCache(com.conference.management.domain.Hotel.class.getName() + ".rooms", jcacheConfiguration);
+            cm.createCache(com.conference.management.domain.Room.class.getName(), jcacheConfiguration);
+            cm.createCache(com.conference.management.domain.Invoice.class.getName(), jcacheConfiguration);
+            cm.createCache(com.conference.management.domain.Booking.class.getName(), jcacheConfiguration);
+            cm.createCache(com.conference.management.domain.Domain.class.getName(), jcacheConfiguration);
+            cm.createCache(com.conference.management.domain.Domain.class.getName() + ".users", jcacheConfiguration);
+            cm.createCache(com.conference.management.domain.Domain.class.getName() + ".articles", jcacheConfiguration);
+            cm.createCache(com.conference.management.domain.Conference.class.getName(), jcacheConfiguration);
+            cm.createCache(com.conference.management.domain.Conference.class.getName() + ".articles", jcacheConfiguration);
+            cm.createCache(com.conference.management.domain.Article.class.getName(), jcacheConfiguration);
+            cm.createCache(com.conference.management.domain.Article.class.getName() + ".users", jcacheConfiguration);
+            cm.createCache(com.conference.management.domain.Article.class.getName() + ".domains", jcacheConfiguration);
+            cm.createCache(com.conference.management.domain.Role.class.getName(), jcacheConfiguration);
+            cm.createCache(com.conference.management.domain.Participation.class.getName(), jcacheConfiguration);
+            cm.createCache(com.conference.management.domain.Opinion.class.getName(), jcacheConfiguration);
+            cm.createCache(com.conference.management.domain.Note.class.getName(), jcacheConfiguration);
             // jhipster-needle-ehcache-add-entry
         };
     }

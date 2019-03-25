@@ -1,0 +1,30 @@
+{
+    "name": "Country",
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 45
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "city",
+            "otherEntityRelationshipName": "country",
+            "relationshipName": "city"
+        }
+    ],
+    "changelogDate": "20190325201106",
+    "entityTableName": "country",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

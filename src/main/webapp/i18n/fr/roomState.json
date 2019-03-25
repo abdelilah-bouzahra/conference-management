@@ -1,0 +1,9 @@
+{
+    "conferenceManagementApp": {
+        "RoomState": {
+            "null": "",
+            "ROOM_AVAILABLE": "ROOM_AVAILABLE",
+            "ROOM_RESERVED": "ROOM_RESERVED"
+        }
+    }
+}

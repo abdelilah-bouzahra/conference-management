@@ -1,0 +1,23 @@
+{
+    "name": "Invoice",
+    "fields": [
+        {
+            "fieldName": "dateInvoice",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "sum",
+            "fieldType": "Float"
+        }
+    ],
+    "relationships": [],
+    "changelogDate": "20190325201110",
+    "entityTableName": "invoice",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

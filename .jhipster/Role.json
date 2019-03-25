@@ -1,0 +1,20 @@
+{
+    "name": "Role",
+    "fields": [
+        {
+            "fieldName": "roleName",
+            "fieldType": "RoleName",
+            "fieldValues": "ADMIN_CONFERENCE,AUTHOR,REVIEWER,CHAIR,KEYNOTE"
+        }
+    ],
+    "relationships": [],
+    "changelogDate": "20190325201115",
+    "entityTableName": "role",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

@@ -1,0 +1,41 @@
+{
+    "name": "Room",
+    "fields": [
+        {
+            "fieldName": "numberRoom",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "numberFloor",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "roomType",
+            "fieldType": "RoomType",
+            "fieldValues": "ROOM_SINGLE,ROOM_DOUBLE,ROOM_TRIPLE,ROOM_QUAD,ROOM_QUEEN,ROOM_KING,ROOM_TWIN,ROOM_STUDIO"
+        },
+        {
+            "fieldName": "roomState",
+            "fieldType": "RoomState",
+            "fieldValues": "ROOM_AVAILABLE,ROOM_RESERVED"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "hotel",
+            "otherEntityRelationshipName": "room",
+            "relationshipName": "hotel",
+            "otherEntityField": "name"
+        }
+    ],
+    "changelogDate": "20190325201109",
+    "entityTableName": "room",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

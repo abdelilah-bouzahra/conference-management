@@ -1,0 +1,43 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="participation">
+            <h2><span jhiTranslate="conferenceManagementApp.participation.detail.title">Participation</span> {{participation.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="conferenceManagementApp.participation.accepted">Accepted</span></dt>
+                <dd>
+                    <span>{{participation.accepted}}</span>
+                </dd>
+                <dt><span jhiTranslate="conferenceManagementApp.participation.user">User</span></dt>
+                <dd>
+                    {{participation.user?.login}}
+                </dd>
+                <dt><span jhiTranslate="conferenceManagementApp.participation.role">Role</span></dt>
+                <dd>
+                    <div *ngIf="participation.role">
+                        <a [routerLink]="['/role', participation.role?.id, 'view']">{{participation.role?.roleName}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="conferenceManagementApp.participation.conference">Conference</span></dt>
+                <dd>
+                    <div *ngIf="participation.conference">
+                        <a [routerLink]="['/conference', participation.conference?.id, 'view']">{{participation.conference?.title}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/participation', participation.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

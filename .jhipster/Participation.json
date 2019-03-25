@@ -1,0 +1,41 @@
+{
+    "name": "Participation",
+    "fields": [
+        {
+            "fieldName": "accepted",
+            "fieldType": "Boolean"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "user",
+            "otherEntityRelationshipName": "participation",
+            "relationshipName": "user",
+            "otherEntityField": "login"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "role",
+            "otherEntityRelationshipName": "participation",
+            "relationshipName": "role",
+            "otherEntityField": "roleName"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "conference",
+            "otherEntityRelationshipName": "participation",
+            "relationshipName": "conference",
+            "otherEntityField": "title"
+        }
+    ],
+    "changelogDate": "20190325201116",
+    "entityTableName": "participation",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

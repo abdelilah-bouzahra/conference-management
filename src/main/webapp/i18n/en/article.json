@@ -1,0 +1,27 @@
+{
+    "conferenceManagementApp": {
+        "article": {
+            "home": {
+                "title": "Articles",
+                "createLabel": "Create a new Article",
+                "createOrEditLabel": "Create or edit a Article"
+            },
+            "created": "A new Article is created with identifier {{ param }}",
+            "updated": "A Article is updated with identifier {{ param }}",
+            "deleted": "A Article is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Article {{ id }}?"
+            },
+            "detail": {
+                "title": "Article"
+            },
+            "title": "Title",
+            "summary": "Summary",
+            "file": "File",
+            "accepted": "Accepted",
+            "user": "User",
+            "domain": "Domain",
+            "conference": "Conference"
+        }
+    }
+}

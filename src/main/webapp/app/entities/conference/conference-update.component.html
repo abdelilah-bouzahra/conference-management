@@ -1,0 +1,100 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="jhi-conference-heading" jhiTranslate="conferenceManagementApp.conference.home.createOrEditLabel">Create or edit a Conference</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!conference.id">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="conference.id" readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="conferenceManagementApp.conference.title" for="field_title">Title</label>
+                    <input type="text" class="form-control" name="title" id="field_title"
+                        [(ngModel)]="conference.title" required maxlength="200"/>
+                    <div [hidden]="!(editForm.controls.title?.dirty && editForm.controls.title?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.title?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.title?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 200 }">
+                        This field cannot be longer than 200 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="conferenceManagementApp.conference.description" for="field_description">Description</label>
+                    <input type="text" class="form-control" name="description" id="field_description"
+                        [(ngModel)]="conference.description" maxlength="1000"/>
+                    <div [hidden]="!(editForm.controls.description?.dirty && editForm.controls.description?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.description?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 1000 }">
+                        This field cannot be longer than 1000 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="conferenceManagementApp.conference.address" for="field_address">Address</label>
+                    <input type="text" class="form-control" name="address" id="field_address"
+                        [(ngModel)]="conference.address" maxlength="200"/>
+                    <div [hidden]="!(editForm.controls.address?.dirty && editForm.controls.address?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.address?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 200 }">
+                        This field cannot be longer than 200 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="conferenceManagementApp.conference.startDate" for="field_startDate">Start Date</label>
+                    <div class="d-flex">
+                        <input id="field_startDate" type="datetime-local" class="form-control" name="startDate" [(ngModel)]="startDate" placeholder="YYYY-MM-DD HH:mm"
+                        required/>
+                    </div>
+                    <div [hidden]="!(editForm.controls.startDate?.dirty && editForm.controls.startDate?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.startDate?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.controls.startDate?.errors?.ZonedDateTimelocal" jhiTranslate="entity.validation.ZonedDateTimelocal">
+                            This field should be a date and time.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="conferenceManagementApp.conference.endDate" for="field_endDate">End Date</label>
+                    <div class="d-flex">
+                        <input id="field_endDate" type="datetime-local" class="form-control" name="endDate" [(ngModel)]="endDate" placeholder="YYYY-MM-DD HH:mm"
+                        required/>
+                    </div>
+                    <div [hidden]="!(editForm.controls.endDate?.dirty && editForm.controls.endDate?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.endDate?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.controls.endDate?.errors?.ZonedDateTimelocal" jhiTranslate="entity.validation.ZonedDateTimelocal">
+                            This field should be a date and time.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="conferenceManagementApp.conference.accepted" for="field_accepted">Accepted</label>
+                    <input type="checkbox" class="form-control" name="accepted" id="field_accepted"
+                        [(ngModel)]="conference.accepted" />
+                </div>
+
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

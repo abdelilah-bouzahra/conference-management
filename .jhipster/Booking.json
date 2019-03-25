@@ -1,0 +1,53 @@
+{
+    "name": "Booking",
+    "fields": [
+        {
+            "fieldName": "bookingDate",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "arrivedDate",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "departureDate",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "numberPerson",
+            "fieldType": "Integer"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "room",
+            "otherEntityRelationshipName": "booking",
+            "relationshipName": "room",
+            "otherEntityField": "numberRoom"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "user",
+            "otherEntityRelationshipName": "booking",
+            "relationshipName": "user",
+            "otherEntityField": "login"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "invoice",
+            "otherEntityRelationshipName": "booking",
+            "relationshipName": "invoice",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20190325201111",
+    "entityTableName": "booking",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

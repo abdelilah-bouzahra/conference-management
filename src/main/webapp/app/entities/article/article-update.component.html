@@ -1,0 +1,88 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="jhi-article-heading" jhiTranslate="conferenceManagementApp.article.home.createOrEditLabel">Create or edit a Article</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!article.id">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="article.id" readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="conferenceManagementApp.article.title" for="field_title">Title</label>
+                    <input type="text" class="form-control" name="title" id="field_title"
+                        [(ngModel)]="article.title" required/>
+                    <div [hidden]="!(editForm.controls.title?.dirty && editForm.controls.title?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.title?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="conferenceManagementApp.article.summary" for="field_summary">Summary</label>
+                    <input type="text" class="form-control" name="summary" id="field_summary"
+                        [(ngModel)]="article.summary" required/>
+                    <div [hidden]="!(editForm.controls.summary?.dirty && editForm.controls.summary?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.summary?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="conferenceManagementApp.article.file" for="field_file">File</label>
+                    <div>
+                        <div *ngIf="article.file" class="form-text text-danger clearfix">
+                            <a class="pull-left" (click)="openFile(article.fileContentType, article.file)" jhiTranslate="entity.action.open">open</a><br>
+                            <span class="pull-left">{{article.fileContentType}}, {{byteSize(article.file)}}</span>
+                            <button type="button" (click)="article.file=null;article.fileContentType=null;"
+                                    class="btn btn-secondary btn-xs pull-right">
+                                <fa-icon [icon]="'times'"></fa-icon>
+                            </button>
+                        </div>
+                        <input type="file" id="file_file" (change)="setFileData($event, article, 'file', false)" jhiTranslate="entity.action.addblob"/>
+                    </div>
+                    <input type="hidden" class="form-control" name="file" id="field_file"
+                        [(ngModel)]="article.file" />
+                    <input type="hidden" class="form-control" name="fileContentType" id="field_fileContentType"
+                        [(ngModel)]="article.fileContentType" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="conferenceManagementApp.article.accepted" for="field_accepted">Accepted</label>
+                    <input type="checkbox" class="form-control" name="accepted" id="field_accepted"
+                        [(ngModel)]="article.accepted" />
+                </div>
+
+                <div class="form-group">
+                    <label jhiTranslate="conferenceManagementApp.article.user" for="field_user">User</label>
+                    <select class="form-control" id="field_user" multiple name="user" [(ngModel)]="article.users">
+                        <option [ngValue]="getSelected(article.users, userOption)" *ngFor="let userOption of users; trackBy: trackUserById">{{userOption.login}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label jhiTranslate="conferenceManagementApp.article.domain" for="field_domain">Domain</label>
+                    <select class="form-control" id="field_domain" multiple name="domain" [(ngModel)]="article.domains">
+                        <option [ngValue]="getSelected(article.domains, domainOption)" *ngFor="let domainOption of domains; trackBy: trackDomainById">{{domainOption.name}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="conferenceManagementApp.article.conference" for="field_conference">Conference</label>
+                    <select class="form-control" id="field_conference" name="conference" [(ngModel)]="article.conference" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="conferenceOption.id === article.conference?.id ? article.conference : conferenceOption" *ngFor="let conferenceOption of conferences; trackBy: trackConferenceById">{{conferenceOption.title}}</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

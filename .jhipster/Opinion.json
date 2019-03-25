@@ -1,0 +1,42 @@
+{
+    "name": "Opinion",
+    "fields": [
+        {
+            "fieldName": "body",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 500
+        },
+        {
+            "fieldName": "type",
+            "fieldType": "Boolean"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "user",
+            "otherEntityRelationshipName": "opinion",
+            "relationshipName": "user",
+            "otherEntityField": "login"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "article",
+            "otherEntityRelationshipName": "opinion",
+            "relationshipName": "article",
+            "otherEntityField": "title"
+        }
+    ],
+    "changelogDate": "20190325201117",
+    "entityTableName": "opinion",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <!--
+        Added the constraints for entity Article.
+    -->
+    <changeSet id="20190325201114-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="article_id"
+                                 baseTableName="article_user"
+                                 constraintName="fk_article_user_article_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="article"/>
+        <addForeignKeyConstraint baseColumnNames="user_id"
+                                 baseTableName="article_user"
+                                 constraintName="fk_article_user_user_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="jhi_user"/>
+        
+        <addForeignKeyConstraint baseColumnNames="article_id"
+                                 baseTableName="article_domain"
+                                 constraintName="fk_article_domain_article_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="article"/>
+        <addForeignKeyConstraint baseColumnNames="domain_id"
+                                 baseTableName="article_domain"
+                                 constraintName="fk_article_domain_domain_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="domain"/>
+        
+        <addForeignKeyConstraint baseColumnNames="conference_id"
+                                 baseTableName="article"
+                                 constraintName="fk_article_conference_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="conference"/>
+
+    </changeSet>
+</databaseChangeLog>

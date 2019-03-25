@@ -1,0 +1,37 @@
+{
+    "name": "City",
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 45
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "hotel",
+            "otherEntityRelationshipName": "city",
+            "relationshipName": "hotel"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "country",
+            "otherEntityRelationshipName": "city",
+            "relationshipName": "country",
+            "otherEntityField": "name"
+        }
+    ],
+    "changelogDate": "20190325201107",
+    "entityTableName": "city",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

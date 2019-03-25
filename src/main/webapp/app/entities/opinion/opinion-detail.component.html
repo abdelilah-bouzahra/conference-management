@@ -1,0 +1,41 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="opinion">
+            <h2><span jhiTranslate="conferenceManagementApp.opinion.detail.title">Opinion</span> {{opinion.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="conferenceManagementApp.opinion.body">Body</span></dt>
+                <dd>
+                    <span>{{opinion.body}}</span>
+                </dd>
+                <dt><span jhiTranslate="conferenceManagementApp.opinion.type">Type</span></dt>
+                <dd>
+                    <span>{{opinion.type}}</span>
+                </dd>
+                <dt><span jhiTranslate="conferenceManagementApp.opinion.user">User</span></dt>
+                <dd>
+                    {{opinion.user?.login}}
+                </dd>
+                <dt><span jhiTranslate="conferenceManagementApp.opinion.article">Article</span></dt>
+                <dd>
+                    <div *ngIf="opinion.article">
+                        <a [routerLink]="['/article', opinion.article?.id, 'view']">{{opinion.article?.title}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/opinion', opinion.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

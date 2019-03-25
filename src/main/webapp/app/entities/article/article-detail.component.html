@@ -1,0 +1,60 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="article">
+            <h2><span jhiTranslate="conferenceManagementApp.article.detail.title">Article</span> {{article.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="conferenceManagementApp.article.title">Title</span></dt>
+                <dd>
+                    <span>{{article.title}}</span>
+                </dd>
+                <dt><span jhiTranslate="conferenceManagementApp.article.summary">Summary</span></dt>
+                <dd>
+                    <span>{{article.summary}}</span>
+                </dd>
+                <dt><span jhiTranslate="conferenceManagementApp.article.file">File</span></dt>
+                <dd>
+                    <div *ngIf="article.file">
+                        <a (click)="openFile(article.fileContentType, article.file)" jhiTranslate="entity.action.open">open</a>
+                        {{article.fileContentType}}, {{byteSize(article.file)}}
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="conferenceManagementApp.article.accepted">Accepted</span></dt>
+                <dd>
+                    <span>{{article.accepted}}</span>
+                </dd>
+                <dt><span jhiTranslate="conferenceManagementApp.article.user">User</span></dt>
+                <dd>
+                    <span *ngFor="let user of article.users; let last = last">
+                        {{user.login}}{{last ? '' : ', '}}
+                    </span>
+                </dd>
+                <dt><span jhiTranslate="conferenceManagementApp.article.domain">Domain</span></dt>
+                <dd>
+                    <span *ngFor="let domain of article.domains; let last = last">
+                        <a [routerLink]="['/domain', domain?.id, 'view' ]">{{domain.name}}</a>{{last ? '' : ', '}}
+                    </span>
+                </dd>
+                <dt><span jhiTranslate="conferenceManagementApp.article.conference">Conference</span></dt>
+                <dd>
+                    <div *ngIf="article.conference">
+                        <a [routerLink]="['/conference', article.conference?.id, 'view']">{{article.conference?.title}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/article', article.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

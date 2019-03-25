@@ -1,0 +1,27 @@
+{
+    "conferenceManagementApp": {
+        "booking": {
+            "home": {
+                "title": "Bookings",
+                "createLabel": "Créer un nouveau Booking",
+                "createOrEditLabel": "Créer ou éditer un Booking"
+            },
+            "created": "Un nouveau Booking a été créé avec l'identifiant {{ param }}",
+            "updated": "Le Booking avec l'identifiant {{ param }} a été mis à jour",
+            "deleted": "Le Booking avec l'identifiant {{ param }} a été supprimé",
+            "delete": {
+                "question": "Etes-vous certain de vouloir supprimer le Booking {{ id }} ?"
+            },
+            "detail": {
+                "title": "Booking"
+            },
+            "bookingDate": "Booking Date",
+            "arrivedDate": "Arrived Date",
+            "departureDate": "Departure Date",
+            "numberPerson": "Number Person",
+            "room": "Room",
+            "user": "User",
+            "invoice": "Invoice"
+        }
+    }
+}

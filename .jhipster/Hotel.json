@@ -1,0 +1,53 @@
+{
+    "name": "Hotel",
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 45
+        },
+        {
+            "fieldName": "address",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 200
+        },
+        {
+            "fieldName": "numberFloors",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "numberRooms",
+            "fieldType": "Integer"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "room",
+            "otherEntityRelationshipName": "hotel",
+            "relationshipName": "room"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "city",
+            "otherEntityRelationshipName": "hotel",
+            "relationshipName": "city",
+            "otherEntityField": "name"
+        }
+    ],
+    "changelogDate": "20190325201108",
+    "entityTableName": "hotel",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

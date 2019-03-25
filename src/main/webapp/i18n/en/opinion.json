@@ -1,0 +1,24 @@
+{
+    "conferenceManagementApp": {
+        "opinion": {
+            "home": {
+                "title": "Opinions",
+                "createLabel": "Create a new Opinion",
+                "createOrEditLabel": "Create or edit a Opinion"
+            },
+            "created": "A new Opinion is created with identifier {{ param }}",
+            "updated": "A Opinion is updated with identifier {{ param }}",
+            "deleted": "A Opinion is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Opinion {{ id }}?"
+            },
+            "detail": {
+                "title": "Opinion"
+            },
+            "body": "Body",
+            "type": "Type",
+            "user": "User",
+            "article": "Article"
+        }
+    }
+}

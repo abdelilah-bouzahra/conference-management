@@ -1,0 +1,23 @@
+{
+    "conferenceManagementApp": {
+        "domain": {
+            "home": {
+                "title": "Domains",
+                "createLabel": "Créer un nouveau Domain",
+                "createOrEditLabel": "Créer ou éditer un Domain"
+            },
+            "created": "Un nouveau Domain a été créé avec l'identifiant {{ param }}",
+            "updated": "Le Domain avec l'identifiant {{ param }} a été mis à jour",
+            "deleted": "Le Domain avec l'identifiant {{ param }} a été supprimé",
+            "delete": {
+                "question": "Etes-vous certain de vouloir supprimer le Domain {{ id }} ?"
+            },
+            "detail": {
+                "title": "Domain"
+            },
+            "name": "Name",
+            "user": "User",
+            "article": "Article"
+        }
+    }
+}

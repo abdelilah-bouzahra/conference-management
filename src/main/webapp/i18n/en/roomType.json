@@ -1,0 +1,15 @@
+{
+    "conferenceManagementApp": {
+        "RoomType": {
+            "null": "",
+            "ROOM_SINGLE": "ROOM_SINGLE",
+            "ROOM_DOUBLE": "ROOM_DOUBLE",
+            "ROOM_TRIPLE": "ROOM_TRIPLE",
+            "ROOM_QUAD": "ROOM_QUAD",
+            "ROOM_QUEEN": "ROOM_QUEEN",
+            "ROOM_KING": "ROOM_KING",
+            "ROOM_TWIN": "ROOM_TWIN",
+            "ROOM_STUDIO": "ROOM_STUDIO"
+        }
+    }
+}

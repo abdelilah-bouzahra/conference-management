@@ -1,0 +1,25 @@
+{
+    "conferenceManagementApp": {
+        "room": {
+            "home": {
+                "title": "Rooms",
+                "createLabel": "Créer un nouveau Room",
+                "createOrEditLabel": "Créer ou éditer un Room"
+            },
+            "created": "Un nouveau Room a été créé avec l'identifiant {{ param }}",
+            "updated": "Le Room avec l'identifiant {{ param }} a été mis à jour",
+            "deleted": "Le Room avec l'identifiant {{ param }} a été supprimé",
+            "delete": {
+                "question": "Etes-vous certain de vouloir supprimer le Room {{ id }} ?"
+            },
+            "detail": {
+                "title": "Room"
+            },
+            "numberRoom": "Number Room",
+            "numberFloor": "Number Floor",
+            "roomType": "Room Type",
+            "roomState": "Room State",
+            "hotel": "Hotel"
+        }
+    }
+}

@@ -1,0 +1,71 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="jhi-booking-heading" jhiTranslate="conferenceManagementApp.booking.home.createOrEditLabel">Create or edit a Booking</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!booking.id">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="booking.id" readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="conferenceManagementApp.booking.bookingDate" for="field_bookingDate">Booking Date</label>
+                    <div class="d-flex">
+                        <input id="field_bookingDate" type="datetime-local" class="form-control" name="bookingDate" [(ngModel)]="bookingDate" placeholder="YYYY-MM-DD HH:mm"
+                        />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="conferenceManagementApp.booking.arrivedDate" for="field_arrivedDate">Arrived Date</label>
+                    <div class="d-flex">
+                        <input id="field_arrivedDate" type="datetime-local" class="form-control" name="arrivedDate" [(ngModel)]="arrivedDate" placeholder="YYYY-MM-DD HH:mm"
+                        />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="conferenceManagementApp.booking.departureDate" for="field_departureDate">Departure Date</label>
+                    <div class="d-flex">
+                        <input id="field_departureDate" type="datetime-local" class="form-control" name="departureDate" [(ngModel)]="departureDate" placeholder="YYYY-MM-DD HH:mm"
+                        />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="conferenceManagementApp.booking.numberPerson" for="field_numberPerson">Number Person</label>
+                    <input type="number" class="form-control" name="numberPerson" id="field_numberPerson"
+                        [(ngModel)]="booking.numberPerson" />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="conferenceManagementApp.booking.room" for="field_room">Room</label>
+                    <select class="form-control" id="field_room" name="room" [(ngModel)]="booking.room" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="roomOption.id === booking.room?.id ? booking.room : roomOption" *ngFor="let roomOption of rooms; trackBy: trackRoomById">{{roomOption.numberRoom}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="conferenceManagementApp.booking.user" for="field_user">User</label>
+                    <select class="form-control" id="field_user" name="user" [(ngModel)]="booking.user" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="userOption.id === booking.user?.id ? booking.user : userOption" *ngFor="let userOption of users; trackBy: trackUserById">{{userOption.login}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="conferenceManagementApp.booking.invoice" for="field_invoice">Invoice</label>
+                    <select class="form-control" id="field_invoice" name="invoice" [(ngModel)]="booking.invoice" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="invoiceOption.id === booking.invoice?.id ? booking.invoice : invoiceOption" *ngFor="let invoiceOption of invoices; trackBy: trackInvoiceById">{{invoiceOption.id}}</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

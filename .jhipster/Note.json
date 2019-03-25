@@ -1,0 +1,37 @@
+{
+    "name": "Note",
+    "fields": [
+        {
+            "fieldName": "note",
+            "fieldType": "Float",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "user",
+            "otherEntityRelationshipName": "note",
+            "relationshipName": "user",
+            "otherEntityField": "login"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "article",
+            "otherEntityRelationshipName": "note",
+            "relationshipName": "article",
+            "otherEntityField": "title"
+        }
+    ],
+    "changelogDate": "20190325201118",
+    "entityTableName": "note",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

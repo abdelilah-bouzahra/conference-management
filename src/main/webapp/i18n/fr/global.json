@@ -7,6 +7,19 @@
             "jhipster-needle-menu-add-element": "JHipster will add additional menu entries here (do not translate!)",
             "entities": {
                 "main": "Entités",
+                "country": "Country",
+                "city": "City",
+                "hotel": "Hotel",
+                "room": "Room",
+                "invoice": "Invoice",
+                "booking": "Booking",
+                "domain": "Domain",
+                "conference": "Conference",
+                "article": "Article",
+                "role": "Role",
+                "participation": "Participation",
+                "opinion": "Opinion",
+                "note": "Note",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

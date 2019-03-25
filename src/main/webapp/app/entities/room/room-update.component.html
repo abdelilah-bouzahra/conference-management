@@ -1,0 +1,61 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="jhi-room-heading" jhiTranslate="conferenceManagementApp.room.home.createOrEditLabel">Create or edit a Room</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!room.id">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="room.id" readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="conferenceManagementApp.room.numberRoom" for="field_numberRoom">Number Room</label>
+                    <input type="number" class="form-control" name="numberRoom" id="field_numberRoom"
+                        [(ngModel)]="room.numberRoom" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="conferenceManagementApp.room.numberFloor" for="field_numberFloor">Number Floor</label>
+                    <input type="number" class="form-control" name="numberFloor" id="field_numberFloor"
+                        [(ngModel)]="room.numberFloor" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="conferenceManagementApp.room.roomType" for="field_roomType">Room Type</label>
+                    <select class="form-control" name="roomType" [(ngModel)]="room.roomType" id="field_roomType" >
+                        <option value="ROOM_SINGLE">{{'conferenceManagementApp.RoomType.ROOM_SINGLE' | translate}}</option>
+                        <option value="ROOM_DOUBLE">{{'conferenceManagementApp.RoomType.ROOM_DOUBLE' | translate}}</option>
+                        <option value="ROOM_TRIPLE">{{'conferenceManagementApp.RoomType.ROOM_TRIPLE' | translate}}</option>
+                        <option value="ROOM_QUAD">{{'conferenceManagementApp.RoomType.ROOM_QUAD' | translate}}</option>
+                        <option value="ROOM_QUEEN">{{'conferenceManagementApp.RoomType.ROOM_QUEEN' | translate}}</option>
+                        <option value="ROOM_KING">{{'conferenceManagementApp.RoomType.ROOM_KING' | translate}}</option>
+                        <option value="ROOM_TWIN">{{'conferenceManagementApp.RoomType.ROOM_TWIN' | translate}}</option>
+                        <option value="ROOM_STUDIO">{{'conferenceManagementApp.RoomType.ROOM_STUDIO' | translate}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="conferenceManagementApp.room.roomState" for="field_roomState">Room State</label>
+                    <select class="form-control" name="roomState" [(ngModel)]="room.roomState" id="field_roomState" >
+                        <option value="ROOM_AVAILABLE">{{'conferenceManagementApp.RoomState.ROOM_AVAILABLE' | translate}}</option>
+                        <option value="ROOM_RESERVED">{{'conferenceManagementApp.RoomState.ROOM_RESERVED' | translate}}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="conferenceManagementApp.room.hotel" for="field_hotel">Hotel</label>
+                    <select class="form-control" id="field_hotel" name="hotel" [(ngModel)]="room.hotel" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="hotelOption.id === room.hotel?.id ? room.hotel : hotelOption" *ngFor="let hotelOption of hotels; trackBy: trackHotelById">{{hotelOption.name}}</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

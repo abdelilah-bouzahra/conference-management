@@ -5,6 +5,28 @@
     xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
 
     <include file="config/liquibase/changelog/00000000000000_initial_schema.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190325201106_added_entity_Country.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190325201107_added_entity_City.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190325201108_added_entity_Hotel.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190325201109_added_entity_Room.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190325201110_added_entity_Invoice.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190325201111_added_entity_Booking.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190325201112_added_entity_Domain.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190325201113_added_entity_Conference.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190325201114_added_entity_Article.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190325201115_added_entity_Role.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190325201116_added_entity_Participation.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190325201117_added_entity_Opinion.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190325201118_added_entity_Note.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
+    <include file="config/liquibase/changelog/20190325201107_added_entity_constraints_City.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190325201108_added_entity_constraints_Hotel.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190325201109_added_entity_constraints_Room.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190325201111_added_entity_constraints_Booking.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190325201112_added_entity_constraints_Domain.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190325201114_added_entity_constraints_Article.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190325201116_added_entity_constraints_Participation.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190325201117_added_entity_constraints_Opinion.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190325201118_added_entity_constraints_Note.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
 </databaseChangeLog>
