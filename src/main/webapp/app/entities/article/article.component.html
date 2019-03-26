@@ -14,7 +14,7 @@
         <table class="table table-striped">
             <thead>
             <tr>
-            <th><span jhiTranslate="global.field.id">ID</span></th>
+            <th *jhiHasAnyAuthority="'ROLE_ADMIN'"><span jhiTranslate="global.field.id">ID</span></th>
             <th><span jhiTranslate="conferenceManagementApp.article.title">Title</span></th>
             <th><span jhiTranslate="conferenceManagementApp.article.summary">Summary</span></th>
             <th><span jhiTranslate="conferenceManagementApp.article.file">File</span></th>
@@ -27,7 +27,7 @@
             </thead>
             <tbody>
             <tr *ngFor="let article of articles ;trackBy: trackId">
-                <td><a [routerLink]="['/article', article.id, 'view' ]">{{article.id}}</a></td>
+                <td *jhiHasAnyAuthority="'ROLE_ADMIN'"><a [routerLink]="['/article', article.id, 'view' ]">{{article.id}}</a></td>
                 <td>{{article.title}}</td>
                 <td>{{article.summary}}</td>
                 <td>

@@ -15,12 +15,12 @@
             "detail": {
                 "title": "Conference"
             },
-            "title": "Title",
+            "title": "Titre",
             "description": "Description",
-            "address": "Address",
-            "startDate": "Start Date",
-            "endDate": "End Date",
-            "accepted": "Accepted",
+            "address": "Adresse",
+            "startDate": "Date de début",
+            "endDate": "Date de fin",
+            "accepted": "Accepté",
             "article": "Article"
         }
     }

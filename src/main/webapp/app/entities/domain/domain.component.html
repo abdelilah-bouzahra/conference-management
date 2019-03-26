@@ -14,21 +14,21 @@
         <table class="table table-striped">
             <thead>
             <tr>
-            <th><span jhiTranslate="global.field.id">ID</span></th>
+            <th *jhiHasAnyAuthority="'ROLE_ADMIN'"><span jhiTranslate="global.field.id">ID</span></th>
             <th><span jhiTranslate="conferenceManagementApp.domain.name">Name</span></th>
-            <th><span jhiTranslate="conferenceManagementApp.domain.user">User</span></th>
+            <!--<th><span jhiTranslate="conferenceManagementApp.domain.user">User</span></th>-->
             <th></th>
             </tr>
             </thead>
             <tbody>
             <tr *ngFor="let domain of domains ;trackBy: trackId">
-                <td><a [routerLink]="['/domain', domain.id, 'view' ]">{{domain.id}}</a></td>
+                <td *jhiHasAnyAuthority="'ROLE_ADMIN'"><a [routerLink]="['/domain', domain.id, 'view' ]">{{domain.id}}</a></td>
                 <td>{{domain.name}}</td>
-                <td>
+<!--                <td>
                     <span *ngFor="let user of domain.users; let last = last">
                             {{user.login}}{{last ? '' : ', '}}
                         </span>
-                </td>
+                </td>-->
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"
@@ -37,13 +37,13 @@
                             <fa-icon [icon]="'eye'"></fa-icon>
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
                         </button>
-                        <button type="submit"
+                        <button *jhiHasAnyAuthority="'ROLE_ADMIN'" type="submit"
                                 [routerLink]="['/domain', domain.id, 'edit']"
                                 class="btn btn-primary btn-sm">
                             <fa-icon [icon]="'pencil-alt'"></fa-icon>
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
                         </button>
-                        <button type="submit"
+                        <button *jhiHasAnyAuthority="'ROLE_ADMIN'" type="submit"
                                 [routerLink]="['/', 'domain', { outlets: { popup: domain.id + '/delete'} }]"
                                 replaceUrl="true"
                                 queryParamsHandling="merge"

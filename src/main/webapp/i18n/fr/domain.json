@@ -13,10 +13,10 @@
                 "question": "Etes-vous certain de vouloir supprimer le Domain {{ id }} ?"
             },
             "detail": {
-                "title": "Domain"
+                "title": "Domaine"
             },
-            "name": "Name",
-            "user": "User",
+            "name": "Nom",
+            "user": "Utilisateur",
             "article": "Article"
         }
     }

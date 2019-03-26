@@ -15,12 +15,12 @@
             "detail": {
                 "title": "Article"
             },
-            "title": "Title",
-            "summary": "Summary",
-            "file": "File",
-            "accepted": "Accepted",
-            "user": "User",
-            "domain": "Domain",
+            "title": "Titre",
+            "summary": "Résumé",
+            "file": "Document",
+            "accepted": "Accepté",
+            "user": "Auteurs",
+            "domain": "Domaine",
             "conference": "Conference"
         }
     }
