@@ -29,6 +29,13 @@
                 <constraints nullable="true" />
             </column>
 
+            <column name="photo" type="longblob">
+                <constraints nullable="true" />
+            </column>
+            <column name="photo_content_type" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
             <column name="address" type="varchar(200)">
                 <constraints nullable="true" />
             </column>
@@ -42,6 +49,10 @@
             </column>
 
             <column name="accepted" type="boolean">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="user_id" type="bigint">
                 <constraints nullable="true" />
             </column>
 

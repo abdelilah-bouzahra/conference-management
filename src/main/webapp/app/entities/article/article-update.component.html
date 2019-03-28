@@ -49,16 +49,23 @@
                     <input type="hidden" class="form-control" name="fileContentType" id="field_fileContentType"
                         [(ngModel)]="article.fileContentType" />
                 </div>
-                <div *jhiHasAnyAuthority="'ROLE_ADMIN'" class="form-check">
-                    <input type="checkbox" class="form-check-input" name="accepted" id="field_accepted"
-                           [(ngModel)]="article.accepted" />
-                    <label class="form-check-label" jhiTranslate="conferenceManagementApp.article.accepted" for="field_accepted">Accepted</label>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="conferenceManagementApp.article.accepted" for="field_accepted">Accepted</label>
+                    <input type="checkbox" class="form-control" name="accepted" id="field_accepted"
+                        [(ngModel)]="article.accepted" />
                 </div>
 
                 <div class="form-group">
-                    <label jhiTranslate="conferenceManagementApp.article.user" for="field_user">User</label>
-                    <select class="form-control" id="field_user" multiple name="user" [(ngModel)]="article.users">
-                        <option [ngValue]="getSelected(article.users, userOption)" *ngFor="let userOption of users; trackBy: trackUserById">{{userOption.login}}</option>
+                    <label class="form-control-label" jhiTranslate="conferenceManagementApp.article.user" for="field_user">User</label>
+                    <select class="form-control" id="field_user" name="user" [(ngModel)]="article.user" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="userOption.id === article.user?.id ? article.user : userOption" *ngFor="let userOption of users; trackBy: trackUserById">{{userOption.login}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label jhiTranslate="conferenceManagementApp.article.authors" for="field_authors">Authors</label>
+                    <select class="form-control" id="field_authors" multiple name="authors" [(ngModel)]="article.authors">
+                        <option [ngValue]="getSelected(article.authors, userOption)" *ngFor="let userOption of users; trackBy: trackUserById">{{userOption.login}}</option>
                     </select>
                 </div>
                 <div class="form-group">

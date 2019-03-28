@@ -19,9 +19,10 @@
             "summary": "Résumé",
             "file": "Document",
             "accepted": "Accepté",
-            "user": "Auteurs",
+            "user": "Utilisateur",
+            "authors": "Auteurs",
             "domain": "Domaine",
-            "conference": "Conference"
+            "conference": "Conférence"
         }
     }
 }

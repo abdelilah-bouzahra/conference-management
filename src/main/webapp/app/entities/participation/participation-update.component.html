@@ -1,47 +1,66 @@
 <div class="row justify-content-center">
     <div class="col-8">
         <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
-            <h2 id="jhi-participation-heading" jhiTranslate="conferenceManagementApp.participation.home.createOrEditLabel">Create or edit a Participation</h2>
+            <h2 id="jhi-participation-heading"
+                jhiTranslate="conferenceManagementApp.participation.home.createOrEditLabel">Create or edit a
+                Participation</h2>
             <div>
                 <jhi-alert-error></jhi-alert-error>
-                <div class="form-group" [hidden]="!participation.id">
+                <div *jhiHasAnyAuthority="'ROLE_ADMIN'" class="form-group" [hidden]="!participation.id">
                     <label for="id" jhiTranslate="global.field.id">ID</label>
                     <input type="text" class="form-control" id="id" name="id"
-                        [(ngModel)]="participation.id" readonly />
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="conferenceManagementApp.participation.accepted" for="field_accepted">Accepted</label>
-                    <input type="checkbox" class="form-control" name="accepted" id="field_accepted"
-                        [(ngModel)]="participation.accepted" />
+                           [(ngModel)]="participation.id" readonly/>
                 </div>
 
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="conferenceManagementApp.participation.user" for="field_user">User</label>
-                    <select class="form-control" id="field_user" name="user" [(ngModel)]="participation.user" >
+                    <label class="form-control-label" jhiTranslate="conferenceManagementApp.participation.conference"
+                           for="field_conference">Conference</label>
+                    <select class="form-control" id="field_conference" name="conference"
+                            [(ngModel)]="participation.conference">
                         <option [ngValue]="null"></option>
-                        <option [ngValue]="userOption.id === participation.user?.id ? participation.user : userOption" *ngFor="let userOption of users; trackBy: trackUserById">{{userOption.login}}</option>
+                        <option
+                            [ngValue]="conferenceOption.id === participation.conference?.id ? participation.conference : conferenceOption"
+                            *ngFor="let conferenceOption of conferences; trackBy: trackConferenceById">{{conferenceOption.title}}</option>
                     </select>
                 </div>
+
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="conferenceManagementApp.participation.role" for="field_role">Role</label>
-                    <select class="form-control" id="field_role" name="role" [(ngModel)]="participation.role" >
+                    <label class="form-control-label" jhiTranslate="conferenceManagementApp.participation.role"
+                           for="field_role">Role</label>
+                    <select class="form-control" id="field_role" name="role" [(ngModel)]="participation.role">
                         <option [ngValue]="null"></option>
-                        <option [ngValue]="roleOption.id === participation.role?.id ? participation.role : roleOption" *ngFor="let roleOption of roles; trackBy: trackRoleById">{{roleOption.roleName}}</option>
+                        <option [ngValue]="roleOption.id === participation.role?.id ? participation.role : roleOption"
+                                *ngFor="let roleOption of roles; trackBy: trackRoleById">{{roleOption.roleName}}</option>
                     </select>
                 </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="conferenceManagementApp.participation.conference" for="field_conference">Conference</label>
-                    <select class="form-control" id="field_conference" name="conference" [(ngModel)]="participation.conference" >
+
+                <div *jhiHasAnyAuthority="'ROLE_ADMIN'" class="form-group">
+                    <label class="form-control-label" jhiTranslate="conferenceManagementApp.participation.user"
+                           for="field_user">User</label>
+                    <select class="form-control" id="field_user" name="user" [(ngModel)]="participation.user">
                         <option [ngValue]="null"></option>
-                        <option [ngValue]="conferenceOption.id === participation.conference?.id ? participation.conference : conferenceOption" *ngFor="let conferenceOption of conferences; trackBy: trackConferenceById">{{conferenceOption.title}}</option>
+                        <option [ngValue]="userOption.id === participation.user?.id ? participation.user : userOption"
+                                *ngFor="let userOption of users; trackBy: trackUserById">{{userOption.login}}</option>
                     </select>
                 </div>
+                <div *jhiHasAnyAuthority="'ROLE_ADMIN'" class="form-group">
+                    <div class="form-check">
+                        <label class="form-check-label" for="field_accepted">
+                            <input type="checkbox" class="form-check-input" name="accepted" id="field_accepted"
+                                   [(ngModel)]="participation.accepted"/>
+                            <span jhiTranslate="conferenceManagementApp.participation.accepted"
+                                  for="field_accepted">Accepted</span>
+                        </label>
+                    </div>
+                </div>
+
             </div>
             <div>
-                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
                     <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
                 </button>
-                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving"
+                        class="btn btn-primary">
                     <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
                 </button>
             </div>

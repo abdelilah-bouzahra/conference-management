@@ -40,6 +40,10 @@
                 <constraints nullable="true" />
             </column>
 
+            <column name="user_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
             <column name="conference_id" type="bigint">
                 <constraints nullable="true" />
             </column>
@@ -47,8 +51,8 @@
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
         </createTable>
         
-        <createTable tableName="article_user">
-            <column name="user_id" type="bigint">
+        <createTable tableName="article_authors">
+            <column name="authors_id" type="bigint">
                 <constraints nullable="false"/>
             </column>
             <column name="article_id" type="bigint">
@@ -56,7 +60,7 @@
             </column>
         </createTable>
 
-        <addPrimaryKey columnNames="article_id, user_id" tableName="article_user"/>
+        <addPrimaryKey columnNames="article_id, authors_id" tableName="article_authors"/>
         
         <createTable tableName="article_domain">
             <column name="domain_id" type="bigint">

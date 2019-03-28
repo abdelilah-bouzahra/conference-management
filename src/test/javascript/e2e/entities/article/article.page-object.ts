@@ -31,6 +31,7 @@ export class ArticleUpdatePage {
     fileInput = element(by.id('file_file'));
     acceptedInput = element(by.id('field_accepted'));
     userSelect = element(by.id('field_user'));
+    authorsSelect = element(by.id('field_authors'));
     domainSelect = element(by.id('field_domain'));
     conferenceSelect = element(by.id('field_conference'));
 
@@ -83,6 +84,25 @@ export class ArticleUpdatePage {
 
     async getUserSelectedOption() {
         return this.userSelect.element(by.css('option:checked')).getText();
+    }
+
+    async authorsSelectLastOption() {
+        await this.authorsSelect
+            .all(by.tagName('option'))
+            .last()
+            .click();
+    }
+
+    async authorsSelectOption(option) {
+        await this.authorsSelect.sendKeys(option);
+    }
+
+    getAuthorsSelect(): ElementFinder {
+        return this.authorsSelect;
+    }
+
+    async getAuthorsSelectedOption() {
+        return this.authorsSelect.element(by.css('option:checked')).getText();
     }
 
     async domainSelectLastOption() {

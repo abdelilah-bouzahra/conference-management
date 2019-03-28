@@ -25,7 +25,7 @@ describe('Service Tests', () => {
             httpMock = injector.get(HttpTestingController);
             currentDate = moment();
 
-            elemDefault = new Conference(0, 'AAAAAAA', 'AAAAAAA', 'AAAAAAA', currentDate, currentDate, false);
+            elemDefault = new Conference(0, 'AAAAAAA', 'AAAAAAA', 'image/png', 'AAAAAAA', 'AAAAAAA', currentDate, currentDate, false);
         });
 
         describe('Service methods', async () => {
@@ -75,6 +75,7 @@ describe('Service Tests', () => {
                     {
                         title: 'BBBBBB',
                         description: 'BBBBBB',
+                        photo: 'BBBBBB',
                         address: 'BBBBBB',
                         startDate: currentDate.format(DATE_TIME_FORMAT),
                         endDate: currentDate.format(DATE_TIME_FORMAT),
@@ -103,6 +104,7 @@ describe('Service Tests', () => {
                     {
                         title: 'BBBBBB',
                         description: 'BBBBBB',
+                        photo: 'BBBBBB',
                         address: 'BBBBBB',
                         startDate: currentDate.format(DATE_TIME_FORMAT),
                         endDate: currentDate.format(DATE_TIME_FORMAT),

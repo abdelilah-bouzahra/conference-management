@@ -2,21 +2,21 @@
     "conferenceManagementApp": {
         "invoice": {
             "home": {
-                "title": "Invoices",
-                "createLabel": "Créer un nouveau Invoice",
-                "createOrEditLabel": "Créer ou éditer un Invoice"
+                "title": "Factures",
+                "createLabel": "Créer une nouvelle Facture",
+                "createOrEditLabel": "Créer ou éditer une Facture"
             },
-            "created": "Un nouveau Invoice a été créé avec l'identifiant {{ param }}",
-            "updated": "Le Invoice avec l'identifiant {{ param }} a été mis à jour",
-            "deleted": "Le Invoice avec l'identifiant {{ param }} a été supprimé",
+            "created": "Une nouvelle Facture a été créé avec l'identifiant {{ param }}",
+            "updated": "La Facture avec l'identifiant {{ param }} a été mis à jour",
+            "deleted": "La Facture avec l'identifiant {{ param }} a été supprimé",
             "delete": {
-                "question": "Etes-vous certain de vouloir supprimer le Invoice {{ id }} ?"
+                "question": "Etes-vous certain de vouloir supprimer la Facture {{ id }} ?"
             },
             "detail": {
-                "title": "Invoice"
+                "title": "Facture"
             },
-            "dateInvoice": "Date Invoice",
-            "sum": "Sum"
+            "dateInvoice": "Date facture",
+            "sum": "Somme"
         }
     }
 }

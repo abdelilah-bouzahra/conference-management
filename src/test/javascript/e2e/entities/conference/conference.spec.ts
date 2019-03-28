@@ -3,6 +3,7 @@ import { browser, ExpectedConditions as ec, protractor, promise } from 'protract
 import { NavBarPage, SignInPage } from '../../page-objects/jhi-page-objects';
 
 import { ConferenceComponentsPage, ConferenceDeleteDialog, ConferenceUpdatePage } from './conference.page-object';
+import * as path from 'path';
 
 const expect = chai.expect;
 
@@ -12,6 +13,9 @@ describe('Conference e2e test', () => {
     let conferenceUpdatePage: ConferenceUpdatePage;
     let conferenceComponentsPage: ConferenceComponentsPage;
     let conferenceDeleteDialog: ConferenceDeleteDialog;
+    const fileNameToUpload = 'logo-jhipster.png';
+    const fileToUpload = '../../../../../main/webapp/content/images/' + fileNameToUpload;
+    const absolutePath = path.resolve(__dirname, fileToUpload);
 
     before(async () => {
         await browser.get('/');
@@ -42,12 +46,15 @@ describe('Conference e2e test', () => {
         await promise.all([
             conferenceUpdatePage.setTitleInput('title'),
             conferenceUpdatePage.setDescriptionInput('description'),
+            conferenceUpdatePage.setPhotoInput(absolutePath),
             conferenceUpdatePage.setAddressInput('address'),
             conferenceUpdatePage.setStartDateInput('01/01/2001' + protractor.Key.TAB + '02:30AM'),
-            conferenceUpdatePage.setEndDateInput('01/01/2001' + protractor.Key.TAB + '02:30AM')
+            conferenceUpdatePage.setEndDateInput('01/01/2001' + protractor.Key.TAB + '02:30AM'),
+            conferenceUpdatePage.userSelectLastOption()
         ]);
         expect(await conferenceUpdatePage.getTitleInput()).to.eq('title');
         expect(await conferenceUpdatePage.getDescriptionInput()).to.eq('description');
+        expect(await conferenceUpdatePage.getPhotoInput()).to.endsWith(fileNameToUpload);
         expect(await conferenceUpdatePage.getAddressInput()).to.eq('address');
         expect(await conferenceUpdatePage.getStartDateInput()).to.contain('2001-01-01T02:30');
         expect(await conferenceUpdatePage.getEndDateInput()).to.contain('2001-01-01T02:30');

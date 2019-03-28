@@ -19,7 +19,8 @@
             "summary": "Summary",
             "file": "File",
             "accepted": "Accepted",
-            "user": "Authors",
+            "user": "User",
+            "authors": "Authors",
             "domain": "Domain",
             "conference": "Conference"
         }

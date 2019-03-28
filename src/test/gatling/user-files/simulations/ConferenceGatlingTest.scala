@@ -74,6 +74,7 @@ class ConferenceGatlingTest extends Simulation {
                 "id":null
                 , "title":"SAMPLE_TEXT"
                 , "description":"SAMPLE_TEXT"
+                , "photo":null
                 , "address":"SAMPLE_TEXT"
                 , "startDate":"2020-01-01T00:00:00.000Z"
                 , "endDate":"2020-01-01T00:00:00.000Z"

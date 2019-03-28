@@ -2,11 +2,11 @@
     "conferenceManagementApp": {
         "RoleName": {
             "null": "",
-            "ADMIN_CONFERENCE": "ADMIN_CONFERENCE",
-            "AUTHOR": "AUTHOR",
-            "REVIEWER": "REVIEWER",
-            "CHAIR": "CHAIR",
-            "KEYNOTE": "KEYNOTE"
+            "ADMIN_CONFERENCE": "Admin",
+            "AUTHOR": "Author",
+            "REVIEWER": "Reviewer",
+            "CHAIR": "Chair",
+            "KEYNOTE": "Keynote"
         }
     }
 }

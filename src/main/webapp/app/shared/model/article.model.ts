@@ -9,7 +9,8 @@ export interface IArticle {
     fileContentType?: string;
     file?: any;
     accepted?: boolean;
-    users?: IUser[];
+    user?: IUser;
+    authors?: IUser[];
     domains?: IDomain[];
     conference?: IConference;
 }
@@ -22,7 +23,8 @@ export class Article implements IArticle {
         public fileContentType?: string,
         public file?: any,
         public accepted?: boolean,
-        public users?: IUser[],
+        public user?: IUser,
+        public authors?: IUser[],
         public domains?: IDomain[],
         public conference?: IConference
     ) {

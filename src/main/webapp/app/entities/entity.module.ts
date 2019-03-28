@@ -55,6 +55,26 @@ import { RouterModule } from '@angular/router';
             {
                 path: 'note',
                 loadChildren: './note/note.module#ConferenceManagementNoteModule'
+            },
+            {
+                path: 'conference',
+                loadChildren: './conference/conference.module#ConferenceManagementConferenceModule'
+            },
+            {
+                path: 'article',
+                loadChildren: './article/article.module#ConferenceManagementArticleModule'
+            },
+            {
+                path: 'article',
+                loadChildren: './article/article.module#ConferenceManagementArticleModule'
+            },
+            {
+                path: 'article',
+                loadChildren: './article/article.module#ConferenceManagementArticleModule'
+            },
+            {
+                path: 'conference',
+                loadChildren: './conference/conference.module#ConferenceManagementConferenceModule'
             }
             /* jhipster-needle-add-entity-route - JHipster will add entity modules routes here */
         ])

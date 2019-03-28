@@ -1,15 +1,24 @@
 package com.conference.management.web.rest;
+import com.conference.management.domain.AbstractAuditingEntity;
 import com.conference.management.domain.Conference;
+import com.conference.management.domain.User;
 import com.conference.management.repository.ConferenceRepository;
+import com.conference.management.repository.UserRepository;
+import com.conference.management.security.SecurityUtils;
+import com.conference.management.service.UserService;
+import com.conference.management.service.dto.UserDTO;
 import com.conference.management.web.rest.errors.BadRequestAlertException;
+import com.conference.management.web.rest.errors.LoginAlreadyUsedException;
 import com.conference.management.web.rest.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.io.Serializable;
 import java.net.URI;
 import java.net.URISyntaxException;
 
@@ -21,13 +30,16 @@ import java.util.Optional;
  */
 @RestController
 @RequestMapping("/api")
-public class ConferenceResource {
+public class ConferenceResource extends AbstractAuditingEntity implements Serializable {
 
     private final Logger log = LoggerFactory.getLogger(ConferenceResource.class);
 
     private static final String ENTITY_NAME = "conference";
 
     private final ConferenceRepository conferenceRepository;
+
+    @Autowired
+    private UserRepository userRepository;
 
     public ConferenceResource(ConferenceRepository conferenceRepository) {
         this.conferenceRepository = conferenceRepository;
@@ -41,11 +53,18 @@ public class ConferenceResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
     @PostMapping("/conferences")
-    public ResponseEntity<Conference> createConference(@Valid @RequestBody Conference conference) throws URISyntaxException {
+    public ResponseEntity<Conference> createConference(@Valid @RequestBody Conference conference) throws Exception {
         log.debug("REST request to save Conference : {}", conference);
         if (conference.getId() != null) {
             throw new BadRequestAlertException("A new conference cannot already have an ID", ENTITY_NAME, "idexists");
         }
+
+       Optional<String> userLogin = SecurityUtils.getCurrentUserLogin();
+        if (userLogin.isPresent()) {
+            Optional<User> user = userRepository.findOneByLogin(userLogin.get());
+            conference.setUser(user.orElse(null));
+        }
+
         Conference result = conferenceRepository.save(conference);
         return ResponseEntity.created(new URI("/api/conferences/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
@@ -81,7 +100,7 @@ public class ConferenceResource {
     @GetMapping("/conferences")
     public List<Conference> getAllConferences() {
         log.debug("REST request to get all Conferences");
-        return conferenceRepository.findAll();
+        return conferenceRepository.findByAccepted(true);
     }
 
     /**

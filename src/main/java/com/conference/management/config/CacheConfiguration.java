@@ -59,6 +59,7 @@ public class CacheConfiguration {
             cm.createCache(com.conference.management.domain.Participation.class.getName(), jcacheConfiguration);
             cm.createCache(com.conference.management.domain.Opinion.class.getName(), jcacheConfiguration);
             cm.createCache(com.conference.management.domain.Note.class.getName(), jcacheConfiguration);
+            cm.createCache(com.conference.management.domain.Article.class.getName() + ".authors", jcacheConfiguration);
             // jhipster-needle-ehcache-add-entry
         };
     }

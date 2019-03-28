@@ -17,11 +17,15 @@
             },
             "title": "Title",
             "description": "Description",
+            "photo": "Photo",
             "address": "Address",
             "startDate": "Start Date",
             "endDate": "End Date",
             "accepted": "Accepted",
-            "article": "Article"
+            "article": "Article",
+            "user": "User",
+            "accepted": "Accepted",
+            "refused": "Refused"
         }
     }
 }

@@ -4,7 +4,7 @@
             <h2 id="jhi-domain-heading" jhiTranslate="conferenceManagementApp.domain.home.createOrEditLabel">Create or edit a Domain</h2>
             <div>
                 <jhi-alert-error></jhi-alert-error>
-                <div class="form-group" [hidden]="!domain.id">
+                <div *jhiHasAnyAuthority="'ROLE_ADMIN'" class="form-group" [hidden]="!domain.id">
                     <label for="id" jhiTranslate="global.field.id">ID</label>
                     <input type="text" class="form-control" id="id" name="id"
                         [(ngModel)]="domain.id" readonly />

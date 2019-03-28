@@ -47,7 +47,8 @@ describe('Article e2e test', () => {
             articleUpdatePage.setTitleInput('title'),
             articleUpdatePage.setSummaryInput('summary'),
             articleUpdatePage.setFileInput(absolutePath),
-            // articleUpdatePage.userSelectLastOption(),
+            articleUpdatePage.userSelectLastOption(),
+            // articleUpdatePage.authorsSelectLastOption(),
             // articleUpdatePage.domainSelectLastOption(),
             articleUpdatePage.conferenceSelectLastOption()
         ]);

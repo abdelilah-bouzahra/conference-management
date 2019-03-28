@@ -19,6 +19,11 @@
             "fieldValidateRulesMaxlength": 1000
         },
         {
+            "fieldName": "photo",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "image"
+        },
+        {
             "fieldName": "address",
             "fieldType": "String",
             "fieldValidateRules": [
@@ -51,6 +56,13 @@
             "otherEntityName": "article",
             "otherEntityRelationshipName": "conference",
             "relationshipName": "article"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "user",
+            "otherEntityRelationshipName": "conference",
+            "relationshipName": "user",
+            "otherEntityField": "login"
         }
     ],
     "changelogDate": "20190325201113",

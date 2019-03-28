@@ -2,26 +2,26 @@
     "conferenceManagementApp": {
         "booking": {
             "home": {
-                "title": "Bookings",
-                "createLabel": "Créer un nouveau Booking",
-                "createOrEditLabel": "Créer ou éditer un Booking"
+                "title": "Réservations",
+                "createLabel": "Créer une nouvelle réservation",
+                "createOrEditLabel": "Créer ou éditer une réservation"
             },
-            "created": "Un nouveau Booking a été créé avec l'identifiant {{ param }}",
-            "updated": "Le Booking avec l'identifiant {{ param }} a été mis à jour",
-            "deleted": "Le Booking avec l'identifiant {{ param }} a été supprimé",
+            "created": "Une nouvelle réservation a été créé avec l'identifiant {{ param }}",
+            "updated": "La réservation avec l'identifiant {{ param }} a été mis à jour",
+            "deleted": "La réservation avec l'identifiant {{ param }} a été supprimé",
             "delete": {
-                "question": "Etes-vous certain de vouloir supprimer le Booking {{ id }} ?"
+                "question": "Etes-vous certain de vouloir supprimer la réservatio {{ id }} ?"
             },
             "detail": {
-                "title": "Booking"
+                "title": "Réservations"
             },
-            "bookingDate": "Booking Date",
-            "arrivedDate": "Arrived Date",
-            "departureDate": "Departure Date",
-            "numberPerson": "Number Person",
-            "room": "Room",
-            "user": "User",
-            "invoice": "Invoice"
+            "bookingDate": "Date de réservation",
+            "arrivedDate": "Date d'arrivée",
+            "departureDate": "Date de départ",
+            "numberPerson": "Nombre de personnes",
+            "room": "Chambre",
+            "user": "Utilisateur",
+            "invoice": "Facture d'achat"
         }
     }
 }

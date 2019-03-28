@@ -33,10 +33,9 @@ export const conferenceRoute: Routes = [
         path: '',
         component: ConferenceComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ANONYMOUS', 'ROLE_USER'],
             pageTitle: 'conferenceManagementApp.conference.home.title'
-        },
-        canActivate: [UserRouteAccessService]
+        }
     },
     {
         path: ':id/view',
@@ -45,10 +44,9 @@ export const conferenceRoute: Routes = [
             conference: ConferenceResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ANONYMOUS', 'ROLE_USER'],
             pageTitle: 'conferenceManagementApp.conference.home.title'
-        },
-        canActivate: [UserRouteAccessService]
+        }
     },
     {
         path: 'new',

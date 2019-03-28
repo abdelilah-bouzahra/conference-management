@@ -28,10 +28,12 @@ export class ConferenceUpdatePage {
     cancelButton = element(by.id('cancel-save'));
     titleInput = element(by.id('field_title'));
     descriptionInput = element(by.id('field_description'));
+    photoInput = element(by.id('file_photo'));
     addressInput = element(by.id('field_address'));
     startDateInput = element(by.id('field_startDate'));
     endDateInput = element(by.id('field_endDate'));
     acceptedInput = element(by.id('field_accepted'));
+    userSelect = element(by.id('field_user'));
 
     async getPageTitle() {
         return this.pageTitle.getAttribute('jhiTranslate');
@@ -51,6 +53,14 @@ export class ConferenceUpdatePage {
 
     async getDescriptionInput() {
         return this.descriptionInput.getAttribute('value');
+    }
+
+    async setPhotoInput(photo) {
+        await this.photoInput.sendKeys(photo);
+    }
+
+    async getPhotoInput() {
+        return this.photoInput.getAttribute('value');
     }
 
     async setAddressInput(address) {
@@ -79,6 +89,25 @@ export class ConferenceUpdatePage {
 
     getAcceptedInput() {
         return this.acceptedInput;
+    }
+
+    async userSelectLastOption() {
+        await this.userSelect
+            .all(by.tagName('option'))
+            .last()
+            .click();
+    }
+
+    async userSelectOption(option) {
+        await this.userSelect.sendKeys(option);
+    }
+
+    getUserSelect(): ElementFinder {
+        return this.userSelect;
+    }
+
+    async getUserSelectedOption() {
+        return this.userSelect.element(by.css('option:checked')).getText();
     }
 
     async save() {

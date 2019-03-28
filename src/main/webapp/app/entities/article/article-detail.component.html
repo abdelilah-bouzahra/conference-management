@@ -26,8 +26,12 @@
                 </dd>
                 <dt><span jhiTranslate="conferenceManagementApp.article.user">User</span></dt>
                 <dd>
-                    <span *ngFor="let user of article.users; let last = last">
-                        {{user.login}}{{last ? '' : ', '}}
+                    {{article.user?.login}}
+                </dd>
+                <dt><span jhiTranslate="conferenceManagementApp.article.authors">Authors</span></dt>
+                <dd>
+                    <span *ngFor="let authors of article.authors; let last = last">
+                        {{authors.login}}{{last ? '' : ', '}}
                     </span>
                 </dd>
                 <dt><span jhiTranslate="conferenceManagementApp.article.domain">Domain</span></dt>

@@ -46,12 +46,16 @@ public class Article implements Serializable {
     @Column(name = "accepted")
     private Boolean accepted;
 
+    @ManyToOne
+    @JsonIgnoreProperties("articles")
+    private User user;
+
     @ManyToMany
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    @JoinTable(name = "article_user",
+    @JoinTable(name = "article_authors",
                joinColumns = @JoinColumn(name = "article_id", referencedColumnName = "id"),
-               inverseJoinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"))
-    private Set<User> users = new HashSet<>();
+               inverseJoinColumns = @JoinColumn(name = "authors_id", referencedColumnName = "id"))
+    private Set<User> authors = new HashSet<>();
 
     @ManyToMany
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
@@ -138,27 +142,40 @@ public class Article implements Serializable {
         this.accepted = accepted;
     }
 
-    public Set<User> getUsers() {
-        return users;
+    public User getUser() {
+        return user;
     }
 
-    public Article users(Set<User> users) {
-        this.users = users;
+    public Article user(User user) {
+        this.user = user;
         return this;
     }
 
-    public Article addUser(User user) {
-        this.users.add(user);
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Set<User> getAuthors() {
+        return authors;
+    }
+
+    public Article authors(Set<User> users) {
+        this.authors = users;
         return this;
     }
 
-    public Article removeUser(User user) {
-        this.users.remove(user);
+    public Article addAuthors(User user) {
+        this.authors.add(user);
         return this;
     }
 
-    public void setUsers(Set<User> users) {
-        this.users = users;
+    public Article removeAuthors(User user) {
+        this.authors.remove(user);
+        return this;
+    }
+
+    public void setAuthors(Set<User> users) {
+        this.authors = users;
     }
 
     public Set<Domain> getDomains() {

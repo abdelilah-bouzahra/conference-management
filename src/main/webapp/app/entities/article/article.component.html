@@ -14,12 +14,13 @@
         <table class="table table-striped">
             <thead>
             <tr>
-            <th *jhiHasAnyAuthority="'ROLE_ADMIN'"><span jhiTranslate="global.field.id">ID</span></th>
+            <th><span jhiTranslate="global.field.id">ID</span></th>
             <th><span jhiTranslate="conferenceManagementApp.article.title">Title</span></th>
             <th><span jhiTranslate="conferenceManagementApp.article.summary">Summary</span></th>
             <th><span jhiTranslate="conferenceManagementApp.article.file">File</span></th>
             <th><span jhiTranslate="conferenceManagementApp.article.accepted">Accepted</span></th>
             <th><span jhiTranslate="conferenceManagementApp.article.user">User</span></th>
+            <th><span jhiTranslate="conferenceManagementApp.article.authors">Authors</span></th>
             <th><span jhiTranslate="conferenceManagementApp.article.domain">Domain</span></th>
             <th><span jhiTranslate="conferenceManagementApp.article.conference">Conference</span></th>
             <th></th>
@@ -27,7 +28,7 @@
             </thead>
             <tbody>
             <tr *ngFor="let article of articles ;trackBy: trackId">
-                <td *jhiHasAnyAuthority="'ROLE_ADMIN'"><a [routerLink]="['/article', article.id, 'view' ]">{{article.id}}</a></td>
+                <td><a [routerLink]="['/article', article.id, 'view' ]">{{article.id}}</a></td>
                 <td>{{article.title}}</td>
                 <td>{{article.summary}}</td>
                 <td>
@@ -36,8 +37,11 @@
                 </td>
                 <td>{{article.accepted}}</td>
                 <td>
-                    <span *ngFor="let user of article.users; let last = last">
-                            {{user.login}}{{last ? '' : ', '}}
+                    {{article.user?.login}}
+                </td>
+                <td>
+                    <span *ngFor="let authors of article.authors; let last = last">
+                            {{authors.login}}{{last ? '' : ', '}}
                         </span>
                 </td>
                 <td>

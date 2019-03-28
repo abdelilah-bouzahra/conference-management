@@ -2,14 +2,14 @@
     "conferenceManagementApp": {
         "RoomType": {
             "null": "",
-            "ROOM_SINGLE": "ROOM_SINGLE",
-            "ROOM_DOUBLE": "ROOM_DOUBLE",
-            "ROOM_TRIPLE": "ROOM_TRIPLE",
-            "ROOM_QUAD": "ROOM_QUAD",
-            "ROOM_QUEEN": "ROOM_QUEEN",
-            "ROOM_KING": "ROOM_KING",
-            "ROOM_TWIN": "ROOM_TWIN",
-            "ROOM_STUDIO": "ROOM_STUDIO"
+            "ROOM_SINGLE": "Single",
+            "ROOM_DOUBLE": "Double",
+            "ROOM_TRIPLE": "Trible",
+            "ROOM_QUAD": "Quad",
+            "ROOM_QUEEN": "Queen",
+            "ROOM_KING": "King",
+            "ROOM_TWIN": "Twin",
+            "ROOM_STUDIO": "Studio"
         }
     }
 }

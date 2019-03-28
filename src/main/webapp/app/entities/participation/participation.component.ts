@@ -16,6 +16,8 @@ export class ParticipationComponent implements OnInit, OnDestroy {
     participations: IParticipation[];
     currentAccount: any;
     eventSubscriber: Subscription;
+    error: any;
+    success: any;
 
     constructor(
         protected participationService: ParticipationService,
@@ -23,6 +25,21 @@ export class ParticipationComponent implements OnInit, OnDestroy {
         protected eventManager: JhiEventManager,
         protected accountService: AccountService
     ) {}
+
+    setAccepted(participation, isAccepted) {
+        participation.accepted = isAccepted;
+
+        this.participationService.update(participation).subscribe(response => {
+            if (response.status === 200) {
+                this.error = null;
+                this.success = 'OK';
+                this.loadAll();
+            } else {
+                this.success = null;
+                this.error = 'ERROR';
+            }
+        });
+    }
 
     loadAll() {
         this.participationService

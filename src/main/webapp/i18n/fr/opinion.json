@@ -2,22 +2,22 @@
     "conferenceManagementApp": {
         "opinion": {
             "home": {
-                "title": "Opinions",
-                "createLabel": "Créer un nouveau Opinion",
-                "createOrEditLabel": "Créer ou éditer un Opinion"
+                "title": "Avis",
+                "createLabel": "Créer un nouveau Avis",
+                "createOrEditLabel": "Créer ou éditer un Avis"
             },
-            "created": "Un nouveau Opinion a été créé avec l'identifiant {{ param }}",
-            "updated": "Le Opinion avec l'identifiant {{ param }} a été mis à jour",
-            "deleted": "Le Opinion avec l'identifiant {{ param }} a été supprimé",
+            "created": "Un nouveau Avis a été créé avec l'identifiant {{ param }}",
+            "updated": "L'avis avec l'identifiant {{ param }} a été mis à jour",
+            "deleted": "L'avis avec l'identifiant {{ param }} a été supprimé",
             "delete": {
-                "question": "Etes-vous certain de vouloir supprimer le Opinion {{ id }} ?"
+                "question": "Etes-vous certain de vouloir supprimer l'Avis {{ id }} ?"
             },
             "detail": {
-                "title": "Opinion"
+                "title": "Avis"
             },
-            "body": "Body",
-            "type": "Type",
-            "user": "User",
+            "body": "Remarque",
+            "type": "Favorable",
+            "user": "Utilisateur",
             "article": "Article"
         }
     }

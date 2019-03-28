@@ -1,9 +1,11 @@
 <div>
     <h2 id="page-heading">
         <span jhiTranslate="conferenceManagementApp.conference.home.title">Conferences</span>
-        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-conference" [routerLink]="['/conference/new']">
+        <button *jhiHasAnyAuthority="'ROLE_ADMIN'" id="jh-create-entity"
+                class="btn btn-primary float-right jh-create-entity create-conference"
+                [routerLink]="['/conference/new']">
             <fa-icon [icon]="'plus'"></fa-icon>
-            <span  jhiTranslate="conferenceManagementApp.conference.home.createLabel">
+            <span jhiTranslate="conferenceManagementApp.conference.home.createLabel">
             Create new Conference
             </span>
         </button>
@@ -14,40 +16,65 @@
         <table class="table table-striped">
             <thead>
             <tr>
-            <th *jhiHasAnyAuthority="'ROLE_ADMIN'"><span jhiTranslate="global.field.id">ID</span></th>
-            <th><span jhiTranslate="conferenceManagementApp.conference.title">Title</span></th>
-            <th><span jhiTranslate="conferenceManagementApp.conference.description">Description</span></th>
-            <th><span jhiTranslate="conferenceManagementApp.conference.address">Address</span></th>
-            <th><span jhiTranslate="conferenceManagementApp.conference.startDate">Start Date</span></th>
-            <th><span jhiTranslate="conferenceManagementApp.conference.endDate">End Date</span></th>
-            <th><span jhiTranslate="conferenceManagementApp.conference.accepted">Accepted</span></th>
-            <th></th>
+                <th *jhiHasAnyAuthority="'ROLE_ADMIN'"><span jhiTranslate="global.field.id">ID</span></th>
+                <th><span jhiTranslate="conferenceManagementApp.conference.title">Title</span></th>
+                <th><span jhiTranslate="conferenceManagementApp.conference.description">Description</span></th>
+                <th><span jhiTranslate="conferenceManagementApp.conference.photo">Photo</span></th>
+                <th><span jhiTranslate="conferenceManagementApp.conference.address">Address</span></th>
+                <th><span jhiTranslate="conferenceManagementApp.conference.startDate">Start Date</span></th>
+                <th><span jhiTranslate="conferenceManagementApp.conference.endDate">End Date</span></th>
+                <th><span jhiTranslate="conferenceManagementApp.conference.user">User</span></th>
+                <th></th>
             </tr>
             </thead>
             <tbody>
             <tr *ngFor="let conference of conferences ;trackBy: trackId">
-                <td *jhiHasAnyAuthority="'ROLE_ADMIN'"><a [routerLink]="['/conference', conference.id, 'view' ]">{{conference.id}}</a></td>
+                <td *jhiHasAnyAuthority="'ROLE_ADMIN'"><a
+                    [routerLink]="['/conference', conference.id, 'view' ]">{{conference.id}}</a></td>
                 <td>{{conference.title}}</td>
                 <td>{{conference.description}}</td>
+                <td>
+                    <a *ngIf="conference.photo" (click)="openFile(conference.photoContentType, conference.photo)">
+                        <img [src]="'data:' + conference.photoContentType + ';base64,' + conference.photo"
+                             style="max-height: 30px;" alt="conference image"/>
+                    </a>
+                    <span *ngIf="conference.photo">{{conference.photoContentType}}
+                        , {{byteSize(conference.photo)}}</span>
+                </td>
                 <td>{{conference.address}}</td>
                 <td>{{conference.startDate | date:'medium'}}</td>
                 <td>{{conference.endDate | date:'medium'}}</td>
-                <td>{{conference.accepted}}</td>
+                <td>
+                    {{conference.user?.login}}
+                </td>
+
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
+                        <span *jhiHasAnyAuthority="'ROLE_ADMIN'">
+                        <button class="btn btn-danger btn-sm" (click)="setAccepted(conference, true)"
+                                *ngIf="!conference.accepted">
+                            <fa-icon [icon]="'times-circle'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="conferenceManagementApp.conference.refused">Refused</span>
+                        </button>
+                        <button class="btn btn-success btn-sm" (click)="setAccepted(conference, false)"
+                                *ngIf="conference.accepted">
+                            <fa-icon [icon]="'check-circle'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="conferenceManagementApp.conference.accepted">Accepted</span>
+                        </button>
+                        </span>
                         <button type="submit"
                                 [routerLink]="['/conference', conference.id, 'view' ]"
                                 class="btn btn-info btn-sm">
                             <fa-icon [icon]="'eye'"></fa-icon>
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
                         </button>
-                        <button type="submit"
+                        <button *jhiHasAnyAuthority="'ROLE_ADMIN'" type="submit"
                                 [routerLink]="['/conference', conference.id, 'edit']"
                                 class="btn btn-primary btn-sm">
                             <fa-icon [icon]="'pencil-alt'"></fa-icon>
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
                         </button>
-                        <button type="submit"
+                        <button *jhiHasAnyAuthority="'ROLE_ADMIN'" type="submit"
                                 [routerLink]="['/', 'conference', { outlets: { popup: conference.id + '/delete'} }]"
                                 replaceUrl="true"
                                 queryParamsHandling="merge"

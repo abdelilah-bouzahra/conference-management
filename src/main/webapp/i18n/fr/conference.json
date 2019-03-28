@@ -2,26 +2,30 @@
     "conferenceManagementApp": {
         "conference": {
             "home": {
-                "title": "Conferences",
-                "createLabel": "Créer un nouveau Conference",
-                "createOrEditLabel": "Créer ou éditer un Conference"
+                "title": "Conférences",
+                "createLabel": "Créer une nouvelle Conférence",
+                "createOrEditLabel": "Créer ou éditer une Conférence"
             },
-            "created": "Un nouveau Conference a été créé avec l'identifiant {{ param }}",
-            "updated": "Le Conference avec l'identifiant {{ param }} a été mis à jour",
-            "deleted": "Le Conference avec l'identifiant {{ param }} a été supprimé",
+            "created": "Une nouvelle Conférence a été créé avec l'identifiant {{ param }}",
+            "updated": "La Conférence avec l'identifiant {{ param }} a été mis à jour",
+            "deleted": "La Conférence avec l'identifiant {{ param }} a été supprimé",
             "delete": {
-                "question": "Etes-vous certain de vouloir supprimer le Conference {{ id }} ?"
+                "question": "Etes-vous certain de vouloir supprimer la Conférence {{ id }} ?"
             },
             "detail": {
-                "title": "Conference"
+                "title": "Conférence"
             },
             "title": "Titre",
             "description": "Description",
+            "photo": "Photo",
             "address": "Adresse",
             "startDate": "Date de début",
             "endDate": "Date de fin",
             "accepted": "Accepté",
-            "article": "Article"
+            "article": "Article",
+            "user": "Admin",
+            "accepted": "Acceptée",
+            "refused": "Refusée"
         }
     }
 }

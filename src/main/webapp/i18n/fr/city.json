@@ -2,22 +2,22 @@
     "conferenceManagementApp": {
         "city": {
             "home": {
-                "title": "Cities",
-                "createLabel": "Créer un nouveau City",
-                "createOrEditLabel": "Créer ou éditer un City"
+                "title": "Villes",
+                "createLabel": "Créer une nouvelle Ville",
+                "createOrEditLabel": "Créer ou éditer une Ville"
             },
-            "created": "Un nouveau City a été créé avec l'identifiant {{ param }}",
-            "updated": "Le City avec l'identifiant {{ param }} a été mis à jour",
-            "deleted": "Le City avec l'identifiant {{ param }} a été supprimé",
+            "created": "Une nouvelle Ville a été créé avec l'identifiant {{ param }}",
+            "updated": "La Ville avec l'identifiant {{ param }} a été mis à jour",
+            "deleted": "La Ville avec l'identifiant {{ param }} a été supprimé",
             "delete": {
-                "question": "Etes-vous certain de vouloir supprimer le City {{ id }} ?"
+                "question": "Etes-vous certain de vouloir supprimer la Ville {{ id }} ?"
             },
             "detail": {
-                "title": "City"
+                "title": "Ville"
             },
-            "name": "Name",
-            "hotel": "Hotel",
-            "country": "Country"
+            "name": "Nom",
+            "hotel": "Hôtel",
+            "country": "Pays"
         }
     }
 }

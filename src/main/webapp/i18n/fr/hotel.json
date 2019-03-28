@@ -2,25 +2,25 @@
     "conferenceManagementApp": {
         "hotel": {
             "home": {
-                "title": "Hotels",
-                "createLabel": "Créer un nouveau Hotel",
-                "createOrEditLabel": "Créer ou éditer un Hotel"
+                "title": "Hôtels",
+                "createLabel": "Créer un nouveau Hôtel",
+                "createOrEditLabel": "Créer ou éditer un Hôtel"
             },
-            "created": "Un nouveau Hotel a été créé avec l'identifiant {{ param }}",
-            "updated": "Le Hotel avec l'identifiant {{ param }} a été mis à jour",
-            "deleted": "Le Hotel avec l'identifiant {{ param }} a été supprimé",
+            "created": "Un nouveau Hôtel a été créé avec l'identifiant {{ param }}",
+            "updated": "L'Hôtel avec l'identifiant {{ param }} a été mis à jour",
+            "deleted": "L'Hôtels avec l'identifiant {{ param }} a été supprimé",
             "delete": {
-                "question": "Etes-vous certain de vouloir supprimer le Hotel {{ id }} ?"
+                "question": "Etes-vous certain de vouloir supprimer l'Hôtels {{ id }} ?"
             },
             "detail": {
-                "title": "Hotel"
+                "title": "Hôtel"
             },
-            "name": "Name",
-            "address": "Address",
-            "numberFloors": "Number Floors",
-            "numberRooms": "Number Rooms",
-            "room": "Room",
-            "city": "City"
+            "name": "Nom",
+            "address": "Adresse",
+            "numberFloors": "Nombre d'étages",
+            "numberRooms": "Nombre de chambres",
+            "room": "Chambre",
+            "city": "Ville"
         }
     }
 }

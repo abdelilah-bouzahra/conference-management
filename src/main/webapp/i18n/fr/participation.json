@@ -3,22 +3,22 @@
         "participation": {
             "home": {
                 "title": "Participations",
-                "createLabel": "Créer un nouveau Participation",
-                "createOrEditLabel": "Créer ou éditer un Participation"
+                "createLabel": "Créer une nouvelle Participation",
+                "createOrEditLabel": "Créer ou éditer une Participation"
             },
-            "created": "Un nouveau Participation a été créé avec l'identifiant {{ param }}",
-            "updated": "Le Participation avec l'identifiant {{ param }} a été mis à jour",
-            "deleted": "Le Participation avec l'identifiant {{ param }} a été supprimé",
+            "created": "Une nouvelle Participation a été créé avec l'identifiant {{ param }}",
+            "updated": "La Participation avec l'identifiant {{ param }} a été mis à jour",
+            "deleted": "La Participation avec l'identifiant {{ param }} a été supprimé",
             "delete": {
-                "question": "Etes-vous certain de vouloir supprimer le Participation {{ id }} ?"
+                "question": "Etes-vous certain de vouloir supprimer la Participation {{ id }} ?"
             },
             "detail": {
                 "title": "Participation"
             },
-            "accepted": "Accepted",
-            "user": "User",
-            "role": "Role",
-            "conference": "Conference"
+            "accepted": "Accepté",
+            "user": "Utilisateur",
+            "role": "Rôle",
+            "conference": "Conférence"
         }
     }
 }

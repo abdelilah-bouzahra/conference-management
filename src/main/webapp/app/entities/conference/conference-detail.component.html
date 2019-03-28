@@ -1,7 +1,7 @@
 <div class="row justify-content-center">
     <div class="col-8">
         <div *ngIf="conference">
-            <h2><span jhiTranslate="conferenceManagementApp.conference.detail.title">Conference</span> {{conference.id}}</h2>
+            <h2><span jhiTranslate="conferenceManagementApp.conference.detail.title">Conference</span> <span *jhiHasAnyAuthority="'ROLE_ADMIN'">{{conference.id}}</span></h2>
             <hr>
             <jhi-alert-error></jhi-alert-error>
             <dl class="row-md jh-entity-details">
@@ -12,6 +12,15 @@
                 <dt><span jhiTranslate="conferenceManagementApp.conference.description">Description</span></dt>
                 <dd>
                     <span>{{conference.description}}</span>
+                </dd>
+                <dt><span jhiTranslate="conferenceManagementApp.conference.photo">Photo</span></dt>
+                <dd>
+                    <div *ngIf="conference.photo">
+                        <a (click)="openFile(conference.photoContentType, conference.photo)">
+                            <img [src]="'data:' + conference.photoContentType + ';base64,' + conference.photo" style="max-width: 100%;" alt="conference image"/>
+                        </a>
+                        {{conference.photoContentType}}, {{byteSize(conference.photo)}}
+                    </div>
                 </dd>
                 <dt><span jhiTranslate="conferenceManagementApp.conference.address">Address</span></dt>
                 <dd>
@@ -25,9 +34,13 @@
                 <dd>
                     <span>{{conference.endDate}}</span>
                 </dd>
-                <dt><span jhiTranslate="conferenceManagementApp.conference.accepted">Accepted</span></dt>
-                <dd>
+                <dt *jhiHasAnyAuthority="'ROLE_ADMIN'"><span jhiTranslate="conferenceManagementApp.conference.accepted">Accepted</span></dt>
+                <dd *jhiHasAnyAuthority="'ROLE_ADMIN'">
                     <span>{{conference.accepted}}</span>
+                </dd>
+                <dt><span jhiTranslate="conferenceManagementApp.conference.user">User</span></dt>
+                <dd>
+                    {{conference.user?.login}}
                 </dd>
             </dl>
 
@@ -37,7 +50,7 @@
                 <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
             </button>
 
-            <button type="button"
+            <button *jhiHasAnyAuthority="'ROLE_ADMIN'" type="button"
                     [routerLink]="['/conference', conference.id, 'edit']"
                     class="btn btn-primary">
                 <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>

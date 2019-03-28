@@ -19,6 +19,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.Base64Utils;
 import org.springframework.validation.Validator;
 
 import javax.persistence.EntityManager;
@@ -47,6 +48,11 @@ public class ConferenceResourceIntTest {
 
     private static final String DEFAULT_DESCRIPTION = "AAAAAAAAAA";
     private static final String UPDATED_DESCRIPTION = "BBBBBBBBBB";
+
+    private static final byte[] DEFAULT_PHOTO = TestUtil.createByteArray(1, "0");
+    private static final byte[] UPDATED_PHOTO = TestUtil.createByteArray(1, "1");
+    private static final String DEFAULT_PHOTO_CONTENT_TYPE = "image/jpg";
+    private static final String UPDATED_PHOTO_CONTENT_TYPE = "image/png";
 
     private static final String DEFAULT_ADDRESS = "AAAAAAAAAA";
     private static final String UPDATED_ADDRESS = "BBBBBBBBBB";
@@ -104,6 +110,8 @@ public class ConferenceResourceIntTest {
         Conference conference = new Conference()
             .title(DEFAULT_TITLE)
             .description(DEFAULT_DESCRIPTION)
+            .photo(DEFAULT_PHOTO)
+            .photoContentType(DEFAULT_PHOTO_CONTENT_TYPE)
             .address(DEFAULT_ADDRESS)
             .startDate(DEFAULT_START_DATE)
             .endDate(DEFAULT_END_DATE)
@@ -133,6 +141,8 @@ public class ConferenceResourceIntTest {
         Conference testConference = conferenceList.get(conferenceList.size() - 1);
         assertThat(testConference.getTitle()).isEqualTo(DEFAULT_TITLE);
         assertThat(testConference.getDescription()).isEqualTo(DEFAULT_DESCRIPTION);
+        assertThat(testConference.getPhoto()).isEqualTo(DEFAULT_PHOTO);
+        assertThat(testConference.getPhotoContentType()).isEqualTo(DEFAULT_PHOTO_CONTENT_TYPE);
         assertThat(testConference.getAddress()).isEqualTo(DEFAULT_ADDRESS);
         assertThat(testConference.getStartDate()).isEqualTo(DEFAULT_START_DATE);
         assertThat(testConference.getEndDate()).isEqualTo(DEFAULT_END_DATE);
@@ -225,6 +235,8 @@ public class ConferenceResourceIntTest {
             .andExpect(jsonPath("$.[*].id").value(hasItem(conference.getId().intValue())))
             .andExpect(jsonPath("$.[*].title").value(hasItem(DEFAULT_TITLE.toString())))
             .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION.toString())))
+            .andExpect(jsonPath("$.[*].photoContentType").value(hasItem(DEFAULT_PHOTO_CONTENT_TYPE)))
+            .andExpect(jsonPath("$.[*].photo").value(hasItem(Base64Utils.encodeToString(DEFAULT_PHOTO))))
             .andExpect(jsonPath("$.[*].address").value(hasItem(DEFAULT_ADDRESS.toString())))
             .andExpect(jsonPath("$.[*].startDate").value(hasItem(DEFAULT_START_DATE.toString())))
             .andExpect(jsonPath("$.[*].endDate").value(hasItem(DEFAULT_END_DATE.toString())))
@@ -244,6 +256,8 @@ public class ConferenceResourceIntTest {
             .andExpect(jsonPath("$.id").value(conference.getId().intValue()))
             .andExpect(jsonPath("$.title").value(DEFAULT_TITLE.toString()))
             .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION.toString()))
+            .andExpect(jsonPath("$.photoContentType").value(DEFAULT_PHOTO_CONTENT_TYPE))
+            .andExpect(jsonPath("$.photo").value(Base64Utils.encodeToString(DEFAULT_PHOTO)))
             .andExpect(jsonPath("$.address").value(DEFAULT_ADDRESS.toString()))
             .andExpect(jsonPath("$.startDate").value(DEFAULT_START_DATE.toString()))
             .andExpect(jsonPath("$.endDate").value(DEFAULT_END_DATE.toString()))
@@ -273,6 +287,8 @@ public class ConferenceResourceIntTest {
         updatedConference
             .title(UPDATED_TITLE)
             .description(UPDATED_DESCRIPTION)
+            .photo(UPDATED_PHOTO)
+            .photoContentType(UPDATED_PHOTO_CONTENT_TYPE)
             .address(UPDATED_ADDRESS)
             .startDate(UPDATED_START_DATE)
             .endDate(UPDATED_END_DATE)
@@ -289,6 +305,8 @@ public class ConferenceResourceIntTest {
         Conference testConference = conferenceList.get(conferenceList.size() - 1);
         assertThat(testConference.getTitle()).isEqualTo(UPDATED_TITLE);
         assertThat(testConference.getDescription()).isEqualTo(UPDATED_DESCRIPTION);
+        assertThat(testConference.getPhoto()).isEqualTo(UPDATED_PHOTO);
+        assertThat(testConference.getPhotoContentType()).isEqualTo(UPDATED_PHOTO_CONTENT_TYPE);
         assertThat(testConference.getAddress()).isEqualTo(UPDATED_ADDRESS);
         assertThat(testConference.getStartDate()).isEqualTo(UPDATED_START_DATE);
         assertThat(testConference.getEndDate()).isEqualTo(UPDATED_END_DATE);

@@ -14,33 +14,43 @@
         <table class="table table-striped">
             <thead>
             <tr>
-            <th><span jhiTranslate="global.field.id">ID</span></th>
-            <th><span jhiTranslate="conferenceManagementApp.participation.accepted">Accepted</span></th>
-            <th><span jhiTranslate="conferenceManagementApp.participation.user">User</span></th>
-            <th><span jhiTranslate="conferenceManagementApp.participation.role">Role</span></th>
+            <th *jhiHasAnyAuthority="'ROLE_ADMIN'"><span jhiTranslate="global.field.id">ID</span></th>
             <th><span jhiTranslate="conferenceManagementApp.participation.conference">Conference</span></th>
+            <th><span jhiTranslate="conferenceManagementApp.participation.role">Role</span></th>
+            <th *jhiHasAnyAuthority="'ROLE_ADMIN'"><span jhiTranslate="conferenceManagementApp.participation.user">User</span></th>
             <th></th>
             </tr>
             </thead>
             <tbody>
             <tr *ngFor="let participation of participations ;trackBy: trackId">
-                <td><a [routerLink]="['/participation', participation.id, 'view' ]">{{participation.id}}</a></td>
-                <td>{{participation.accepted}}</td>
+                <td *jhiHasAnyAuthority="'ROLE_ADMIN'"><a [routerLink]="['/participation', participation.id, 'view' ]">{{participation.id}}</a></td>
                 <td>
-                    {{participation.user?.login}}
+                    <div *ngIf="participation.conference">
+                        <a [routerLink]="['../conference', participation.conference?.id, 'view' ]" >{{participation.conference?.title}}</a>
+                    </div>
                 </td>
                 <td>
                     <div *ngIf="participation.role">
                         <a [routerLink]="['../role', participation.role?.id, 'view' ]" >{{participation.role?.roleName}}</a>
                     </div>
                 </td>
-                <td>
-                    <div *ngIf="participation.conference">
-                        <a [routerLink]="['../conference', participation.conference?.id, 'view' ]" >{{participation.conference?.title}}</a>
-                    </div>
+                <td *jhiHasAnyAuthority="'ROLE_ADMIN'">
+                    {{participation.user?.login}}
                 </td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
+                        <span *jhiHasAnyAuthority="'ROLE_ADMIN'">
+                        <button class="btn btn-danger btn-sm" (click)="setAccepted(participation, true)"
+                                *ngIf="!participation.accepted">
+                            <fa-icon [icon]="'times-circle'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="conferenceManagementApp.conference.refused">Refused</span>
+                        </button>
+                        <button class="btn btn-success btn-sm" (click)="setAccepted(participation, false)"
+                                *ngIf="participation.accepted">
+                            <fa-icon [icon]="'check-circle'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="conferenceManagementApp.conference.accepted">Accepted</span>
+                        </button>
+                        </span>
                         <button type="submit"
                                 [routerLink]="['/participation', participation.id, 'view' ]"
                                 class="btn btn-info btn-sm">
