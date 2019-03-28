@@ -1,17 +1,21 @@
 package com.conference.management.web.rest;
+
 import com.conference.management.domain.Participation;
+import com.conference.management.domain.User;
 import com.conference.management.repository.ParticipationRepository;
+import com.conference.management.repository.UserRepository;
+import com.conference.management.security.SecurityUtils;
 import com.conference.management.web.rest.errors.BadRequestAlertException;
 import com.conference.management.web.rest.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 import java.net.URISyntaxException;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -27,6 +31,9 @@ public class ParticipationResource {
     private static final String ENTITY_NAME = "participation";
 
     private final ParticipationRepository participationRepository;
+
+    @Autowired
+    private UserRepository userRepository;
 
     public ParticipationResource(ParticipationRepository participationRepository) {
         this.participationRepository = participationRepository;
@@ -45,6 +52,15 @@ public class ParticipationResource {
         if (participation.getId() != null) {
             throw new BadRequestAlertException("A new participation cannot already have an ID", ENTITY_NAME, "idexists");
         }
+
+        if (participation.getUser().equals(null)) {
+            Optional<String> userLogin = SecurityUtils.getCurrentUserLogin();
+            if (userLogin.isPresent()) {
+                Optional<User> user = userRepository.findOneByLogin(userLogin.get());
+                participation.setUser(user.orElse(null));
+            }
+        }
+
         Participation result = participationRepository.save(participation);
         return ResponseEntity.created(new URI("/api/participations/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))

@@ -16,6 +16,8 @@ export class ArticleComponent implements OnInit, OnDestroy {
     articles: IArticle[];
     currentAccount: any;
     eventSubscriber: Subscription;
+    error: any;
+    success: any;
 
     constructor(
         protected articleService: ArticleService,
@@ -24,6 +26,21 @@ export class ArticleComponent implements OnInit, OnDestroy {
         protected eventManager: JhiEventManager,
         protected accountService: AccountService
     ) {}
+
+    setAccepted(article, isAccepted) {
+        article.accepted = isAccepted;
+
+        this.articleService.update(article).subscribe(response => {
+            if (response.status === 200) {
+                this.error = null;
+                this.success = 'OK';
+                this.loadAll();
+            } else {
+                this.success = null;
+                this.error = 'ERROR';
+            }
+        });
+    }
 
     loadAll() {
         this.articleService

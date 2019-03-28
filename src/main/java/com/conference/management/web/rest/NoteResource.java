@@ -1,11 +1,15 @@
 package com.conference.management.web.rest;
 import com.conference.management.domain.Note;
+import com.conference.management.domain.User;
 import com.conference.management.repository.NoteRepository;
+import com.conference.management.repository.UserRepository;
+import com.conference.management.security.SecurityUtils;
 import com.conference.management.web.rest.errors.BadRequestAlertException;
 import com.conference.management.web.rest.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,6 +33,9 @@ public class NoteResource {
 
     private final NoteRepository noteRepository;
 
+    @Autowired
+    private UserRepository userRepository;
+
     public NoteResource(NoteRepository noteRepository) {
         this.noteRepository = noteRepository;
     }
@@ -46,6 +53,16 @@ public class NoteResource {
         if (note.getId() != null) {
             throw new BadRequestAlertException("A new note cannot already have an ID", ENTITY_NAME, "idexists");
         }
+
+        if (note.getUser().equals(null)) {
+            Optional<String> userLogin = SecurityUtils.getCurrentUserLogin();
+            if (userLogin.isPresent()) {
+                Optional<User> user = userRepository.findOneByLogin(userLogin.get());
+                note.setUser(user.orElse(null));
+            }
+        }
+
+
         Note result = noteRepository.save(note);
         return ResponseEntity.created(new URI("/api/notes/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))

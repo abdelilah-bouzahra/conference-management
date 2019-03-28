@@ -25,7 +25,8 @@
             "article": "Article",
             "user": "Admin",
             "accepted": "Acceptée",
-            "refused": "Refusée"
+            "refused": "Refusée",
+            "participate": "Participer"
         }
     }
 }

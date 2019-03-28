@@ -1,11 +1,17 @@
 package com.conference.management.web.rest;
 import com.conference.management.domain.Article;
+import com.conference.management.domain.Authority;
+import com.conference.management.domain.User;
 import com.conference.management.repository.ArticleRepository;
+import com.conference.management.repository.AuthorityRepository;
+import com.conference.management.repository.UserRepository;
+import com.conference.management.security.SecurityUtils;
 import com.conference.management.web.rest.errors.BadRequestAlertException;
 import com.conference.management.web.rest.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,8 +19,10 @@ import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 /**
  * REST controller for managing Article.
@@ -28,6 +36,12 @@ public class ArticleResource {
     private static final String ENTITY_NAME = "article";
 
     private final ArticleRepository articleRepository;
+
+    @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
+    private AuthorityRepository authorityRepository;
 
     public ArticleResource(ArticleRepository articleRepository) {
         this.articleRepository = articleRepository;
@@ -46,6 +60,15 @@ public class ArticleResource {
         if (article.getId() != null) {
             throw new BadRequestAlertException("A new article cannot already have an ID", ENTITY_NAME, "idexists");
         }
+
+        if (article.getUser().equals(null)) {
+            Optional<String> userLogin = SecurityUtils.getCurrentUserLogin();
+            if (userLogin.isPresent()) {
+                Optional<User> user = userRepository.findOneByLogin(userLogin.get());
+                article.setUser(user.orElse(null));
+            }
+        }
+
         Article result = articleRepository.save(article);
         return ResponseEntity.created(new URI("/api/articles/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
@@ -82,7 +105,7 @@ public class ArticleResource {
     @GetMapping("/articles")
     public List<Article> getAllArticles(@RequestParam(required = false, defaultValue = "false") boolean eagerload) {
         log.debug("REST request to get all Articles");
-        return articleRepository.findAllWithEagerRelationships();
+        return articleRepository.findByAcceptedAllWithEagerRelationships(true);
     }
 
     /**

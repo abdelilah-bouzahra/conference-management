@@ -33,10 +33,9 @@ export const articleRoute: Routes = [
         path: '',
         component: ArticleComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ANONYMOUS', 'ROLE_USER'],
             pageTitle: 'conferenceManagementApp.article.home.title'
-        },
-        canActivate: [UserRouteAccessService]
+        }
     },
     {
         path: ':id/view',
@@ -45,10 +44,9 @@ export const articleRoute: Routes = [
             article: ArticleResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ANONYMOUS', 'ROLE_USER'],
             pageTitle: 'conferenceManagementApp.article.home.title'
-        },
-        canActivate: [UserRouteAccessService]
+        }
     },
     {
         path: 'new',

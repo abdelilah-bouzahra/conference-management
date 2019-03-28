@@ -1,7 +1,7 @@
 <div class="row justify-content-center">
     <div class="col-8">
         <div *ngIf="article">
-            <h2><span jhiTranslate="conferenceManagementApp.article.detail.title">Article</span> {{article.id}}</h2>
+            <h2><span jhiTranslate="conferenceManagementApp.article.detail.title">Article</span> <span *jhiHasAnyAuthority="'ROLE_ADMIN'">{{article.id}}</span></h2>
             <hr>
             <jhi-alert-error></jhi-alert-error>
             <dl class="row-md jh-entity-details">
@@ -20,14 +20,6 @@
                         {{article.fileContentType}}, {{byteSize(article.file)}}
                     </div>
                 </dd>
-                <dt><span jhiTranslate="conferenceManagementApp.article.accepted">Accepted</span></dt>
-                <dd>
-                    <span>{{article.accepted}}</span>
-                </dd>
-                <dt><span jhiTranslate="conferenceManagementApp.article.user">User</span></dt>
-                <dd>
-                    {{article.user?.login}}
-                </dd>
                 <dt><span jhiTranslate="conferenceManagementApp.article.authors">Authors</span></dt>
                 <dd>
                     <span *ngFor="let authors of article.authors; let last = last">
@@ -40,11 +32,19 @@
                         <a [routerLink]="['/domain', domain?.id, 'view' ]">{{domain.name}}</a>{{last ? '' : ', '}}
                     </span>
                 </dd>
+                <dt><span jhiTranslate="conferenceManagementApp.article.user">User</span></dt>
+                <dd>
+                    {{article.user?.login}}
+                </dd>
                 <dt><span jhiTranslate="conferenceManagementApp.article.conference">Conference</span></dt>
                 <dd>
                     <div *ngIf="article.conference">
                         <a [routerLink]="['/conference', article.conference?.id, 'view']">{{article.conference?.title}}</a>
                     </div>
+                </dd>
+                <dt *jhiHasAnyAuthority="'ROLE_ADMIN'"><span jhiTranslate="conferenceManagementApp.article.accepted">Accepted</span></dt>
+                <dd *jhiHasAnyAuthority="'ROLE_ADMIN'">
+                    <span>{{article.accepted}}</span>
                 </dd>
             </dl>
 
@@ -54,7 +54,7 @@
                 <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
             </button>
 
-            <button type="button"
+            <button *jhiHasAnyAuthority="'ROLE_ADMIN'" type="button"
                     [routerLink]="['/article', article.id, 'edit']"
                     class="btn btn-primary">
                 <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>

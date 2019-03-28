@@ -5,7 +5,7 @@
                 Create or edit a Conference</h2>
             <div>
                 <jhi-alert-error></jhi-alert-error>
-                <div class="form-group" [hidden]="!conference.id">
+                <div *jhiHasAnyAuthority="'ROLE_ADMIN'" class="form-group" [hidden]="!conference.id">
                     <label for="id" jhiTranslate="global.field.id">ID</label>
                     <input type="text" class="form-control" id="id" name="id"
                            [(ngModel)]="conference.id" readonly/>

@@ -1,7 +1,7 @@
 <div>
     <h2 id="page-heading">
         <span jhiTranslate="conferenceManagementApp.conference.home.title">Conferences</span>
-        <button *jhiHasAnyAuthority="'ROLE_ADMIN'" id="jh-create-entity"
+        <button *jhiHasAnyAuthority="'ROLE_USER'" id="jh-create-entity"
                 class="btn btn-primary float-right jh-create-entity create-conference"
                 [routerLink]="['/conference/new']">
             <fa-icon [icon]="'plus'"></fa-icon>
@@ -62,6 +62,13 @@
                             <span class="d-none d-md-inline" jhiTranslate="conferenceManagementApp.conference.accepted">Accepted</span>
                         </button>
                         </span>
+                        <button *jhiHasAnyAuthority="'ROLE_USER'" type="submit"
+                                [routerLink]="['conference/participate']"
+                                class="btn btn-warning btn-sm">
+                            <fa-icon [icon]="'plus'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="conferenceManagementApp.conference.participate">Participate</span>
+                        </button>
+
                         <button type="submit"
                                 [routerLink]="['/conference', conference.id, 'view' ]"
                                 class="btn btn-info btn-sm">

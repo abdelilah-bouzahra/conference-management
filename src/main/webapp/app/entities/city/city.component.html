@@ -1,7 +1,7 @@
 <div>
     <h2 id="page-heading">
         <span jhiTranslate="conferenceManagementApp.city.home.title">Cities</span>
-        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-city" [routerLink]="['/city/new']">
+        <button *jhiHasAnyAuthority="'ROLE_ADMIN'" id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-city" [routerLink]="['/city/new']">
             <fa-icon [icon]="'plus'"></fa-icon>
             <span  jhiTranslate="conferenceManagementApp.city.home.createLabel">
             Create new City
@@ -14,7 +14,7 @@
         <table class="table table-striped">
             <thead>
             <tr>
-            <th><span jhiTranslate="global.field.id">ID</span></th>
+            <th *jhiHasAnyAuthority="'ROLE_ADMIN'"><span jhiTranslate="global.field.id">ID</span></th>
             <th><span jhiTranslate="conferenceManagementApp.city.name">Name</span></th>
             <th><span jhiTranslate="conferenceManagementApp.city.country">Country</span></th>
             <th></th>
@@ -22,7 +22,7 @@
             </thead>
             <tbody>
             <tr *ngFor="let city of cities ;trackBy: trackId">
-                <td><a [routerLink]="['/city', city.id, 'view' ]">{{city.id}}</a></td>
+                <td *jhiHasAnyAuthority="'ROLE_ADMIN'"><a [routerLink]="['/city', city.id, 'view' ]">{{city.id}}</a></td>
                 <td>{{city.name}}</td>
                 <td>
                     <div *ngIf="city.country">
@@ -37,13 +37,13 @@
                             <fa-icon [icon]="'eye'"></fa-icon>
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
                         </button>
-                        <button type="submit"
+                        <button *jhiHasAnyAuthority="'ROLE_ADMIN'" type="submit"
                                 [routerLink]="['/city', city.id, 'edit']"
                                 class="btn btn-primary btn-sm">
                             <fa-icon [icon]="'pencil-alt'"></fa-icon>
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
                         </button>
-                        <button type="submit"
+                        <button *jhiHasAnyAuthority="'ROLE_ADMIN'" type="submit"
                                 [routerLink]="['/', 'city', { outlets: { popup: city.id + '/delete'} }]"
                                 replaceUrl="true"
                                 queryParamsHandling="merge"

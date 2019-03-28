@@ -4,11 +4,20 @@
             <h2 id="jhi-note-heading" jhiTranslate="conferenceManagementApp.note.home.createOrEditLabel">Create or edit a Note</h2>
             <div>
                 <jhi-alert-error></jhi-alert-error>
-                <div class="form-group" [hidden]="!note.id">
+                <div *jhiHasAnyAuthority="'ROLE_ADMIN'" class="form-group" [hidden]="!note.id">
                     <label for="id" jhiTranslate="global.field.id">ID</label>
                     <input type="text" class="form-control" id="id" name="id"
                         [(ngModel)]="note.id" readonly />
                 </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="conferenceManagementApp.note.article" for="field_article">Article</label>
+                    <select class="form-control" id="field_article" name="article" [(ngModel)]="note.article" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="articleOption.id === note.article?.id ? note.article : articleOption" *ngFor="let articleOption of articles; trackBy: trackArticleById">{{articleOption.title}}</option>
+                    </select>
+                </div>
+
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="conferenceManagementApp.note.note" for="field_note">Note</label>
                     <input type="number" class="form-control" name="note" id="field_note"
@@ -25,18 +34,11 @@
                     </div>
                 </div>
 
-                <div class="form-group">
+                <div *jhiHasAnyAuthority="'ROLE_ADMIN'" class="form-group">
                     <label class="form-control-label" jhiTranslate="conferenceManagementApp.note.user" for="field_user">User</label>
                     <select class="form-control" id="field_user" name="user" [(ngModel)]="note.user" >
                         <option [ngValue]="null"></option>
                         <option [ngValue]="userOption.id === note.user?.id ? note.user : userOption" *ngFor="let userOption of users; trackBy: trackUserById">{{userOption.login}}</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="conferenceManagementApp.note.article" for="field_article">Article</label>
-                    <select class="form-control" id="field_article" name="article" [(ngModel)]="note.article" >
-                        <option [ngValue]="null"></option>
-                        <option [ngValue]="articleOption.id === note.article?.id ? note.article : articleOption" *ngFor="let articleOption of articles; trackBy: trackArticleById">{{articleOption.title}}</option>
                     </select>
                 </div>
             </div>

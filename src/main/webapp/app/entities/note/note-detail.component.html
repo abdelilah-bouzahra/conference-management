@@ -1,10 +1,16 @@
 <div class="row justify-content-center">
     <div class="col-8">
         <div *ngIf="note">
-            <h2><span jhiTranslate="conferenceManagementApp.note.detail.title">Note</span> {{note.id}}</h2>
+            <h2><span jhiTranslate="conferenceManagementApp.note.detail.title">Note</span> <span *jhiHasAnyAuthority="'ROLE_ADMIN'">{{note.id}}</span></h2>
             <hr>
             <jhi-alert-error></jhi-alert-error>
             <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="conferenceManagementApp.note.article">Article</span></dt>
+                <dd>
+                    <div *ngIf="note.article">
+                        <a [routerLink]="['/article', note.article?.id, 'view']">{{note.article?.title}}</a>
+                    </div>
+                </dd>
                 <dt><span jhiTranslate="conferenceManagementApp.note.note">Note</span></dt>
                 <dd>
                     <span>{{note.note}}</span>
@@ -12,12 +18,6 @@
                 <dt><span jhiTranslate="conferenceManagementApp.note.user">User</span></dt>
                 <dd>
                     {{note.user?.login}}
-                </dd>
-                <dt><span jhiTranslate="conferenceManagementApp.note.article">Article</span></dt>
-                <dd>
-                    <div *ngIf="note.article">
-                        <a [routerLink]="['/article', note.article?.id, 'view']">{{note.article?.title}}</a>
-                    </div>
                 </dd>
             </dl>
 
@@ -27,7 +27,7 @@
                 <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
             </button>
 
-            <button type="button"
+            <button *jhiHasAnyAuthority="'ROLE_ADMIN'" type="button"
                     [routerLink]="['/note', note.id, 'edit']"
                     class="btn btn-primary">
                 <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>

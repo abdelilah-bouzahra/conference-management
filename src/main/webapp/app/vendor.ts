@@ -41,8 +41,10 @@ import {
     faTasks,
     faHome,
     faCheckCircle,
-    faTimesCircle
+    faTimesCircle,
+    faCommentAlt
 } from '@fortawesome/free-solid-svg-icons';
+import { faStickyNote } from '@fortawesome/free-solid-svg-icons/faStickyNote';
 
 // Adds the SVG icon to the library so you can use it in your page
 library.add(faUser);
@@ -81,5 +83,7 @@ library.add(faTrashAlt);
 library.add(faAsterisk);
 library.add(faCheckCircle);
 library.add(faTimesCircle);
+library.add(faStickyNote);
+library.add(faCommentAlt);
 
 // jhipster-needle-add-element-to-vendor - JHipster will add new menu items here

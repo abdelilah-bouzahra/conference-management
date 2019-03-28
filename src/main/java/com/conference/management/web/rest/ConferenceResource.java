@@ -59,10 +59,12 @@ public class ConferenceResource extends AbstractAuditingEntity implements Serial
             throw new BadRequestAlertException("A new conference cannot already have an ID", ENTITY_NAME, "idexists");
         }
 
-       Optional<String> userLogin = SecurityUtils.getCurrentUserLogin();
-        if (userLogin.isPresent()) {
-            Optional<User> user = userRepository.findOneByLogin(userLogin.get());
-            conference.setUser(user.orElse(null));
+        if (conference.getUser().equals(null)) {
+            Optional<String> userLogin = SecurityUtils.getCurrentUserLogin();
+            if (userLogin.isPresent()) {
+                Optional<User> user = userRepository.findOneByLogin(userLogin.get());
+                conference.setUser(user.orElse(null));
+            }
         }
 
         Conference result = conferenceRepository.save(conference);

@@ -1,9 +1,10 @@
 <div>
     <h2 id="page-heading">
         <span jhiTranslate="conferenceManagementApp.note.home.title">Notes</span>
-        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-note" [routerLink]="['/note/new']">
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-note"
+                [routerLink]="['/note/new']">
             <fa-icon [icon]="'plus'"></fa-icon>
-            <span  jhiTranslate="conferenceManagementApp.note.home.createLabel">
+            <span jhiTranslate="conferenceManagementApp.note.home.createLabel">
             Create new Note
             </span>
         </button>
@@ -14,24 +15,25 @@
         <table class="table table-striped">
             <thead>
             <tr>
-            <th><span jhiTranslate="global.field.id">ID</span></th>
-            <th><span jhiTranslate="conferenceManagementApp.note.note">Note</span></th>
-            <th><span jhiTranslate="conferenceManagementApp.note.user">User</span></th>
-            <th><span jhiTranslate="conferenceManagementApp.note.article">Article</span></th>
-            <th></th>
+                <th *jhiHasAnyAuthority="'ROLE_ADMIN'"><span jhiTranslate="global.field.id">ID</span></th>
+                <th><span jhiTranslate="conferenceManagementApp.note.article">Article</span></th>
+                <th><span jhiTranslate="conferenceManagementApp.note.note">Note</span></th>
+                <th><span
+                    jhiTranslate="conferenceManagementApp.note.user">User</span></th>
+                <th></th>
             </tr>
             </thead>
             <tbody>
             <tr *ngFor="let note of notes ;trackBy: trackId">
-                <td><a [routerLink]="['/note', note.id, 'view' ]">{{note.id}}</a></td>
+                <td *jhiHasAnyAuthority="'ROLE_ADMIN'"><a [routerLink]="['/note', note.id, 'view' ]">{{note.id}}</a></td>
+                <td>
+                    <div *ngIf="note.article">
+                        <a [routerLink]="['../article', note.article?.id, 'view' ]">{{note.article?.title}}</a>
+                    </div>
+                </td>
                 <td>{{note.note}}</td>
                 <td>
                     {{note.user?.login}}
-                </td>
-                <td>
-                    <div *ngIf="note.article">
-                        <a [routerLink]="['../article', note.article?.id, 'view' ]" >{{note.article?.title}}</a>
-                    </div>
                 </td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
@@ -41,13 +43,13 @@
                             <fa-icon [icon]="'eye'"></fa-icon>
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
                         </button>
-                        <button type="submit"
+                        <button *jhiHasAnyAuthority="'ROLE_ADMIN'" type="submit"
                                 [routerLink]="['/note', note.id, 'edit']"
                                 class="btn btn-primary btn-sm">
                             <fa-icon [icon]="'pencil-alt'"></fa-icon>
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
                         </button>
-                        <button type="submit"
+                        <button *jhiHasAnyAuthority="'ROLE_ADMIN'" type="submit"
                                 [routerLink]="['/', 'note', { outlets: { popup: note.id + '/delete'} }]"
                                 replaceUrl="true"
                                 queryParamsHandling="merge"

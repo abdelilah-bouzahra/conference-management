@@ -1,7 +1,7 @@
 <div class="row justify-content-center">
     <div class="col-8">
         <div *ngIf="domain">
-            <h2><span jhiTranslate="conferenceManagementApp.domain.detail.title">Domain</span> {{domain.id}}</h2>
+            <h2><span jhiTranslate="conferenceManagementApp.domain.detail.title">Domain</span> <span *jhiHasAnyAuthority="'ROLE_ADMIN'">{{domain.id}}</span></h2>
             <hr>
             <jhi-alert-error></jhi-alert-error>
             <dl class="row-md jh-entity-details">

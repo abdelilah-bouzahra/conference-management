@@ -19,10 +19,13 @@
             "summary": "Résumé",
             "file": "Document",
             "accepted": "Accepté",
-            "user": "Utilisateur",
+            "user": "Créé par",
             "authors": "Auteurs",
             "domain": "Domaine",
-            "conference": "Conférence"
+            "conference": "Conférence",
+            "accepted": "Acceptée",
+            "refused": "Refusée",
+            "opinion": "Avis"
         }
     }
 }
