@@ -58,7 +58,7 @@ public class BookingResource {
             Optional<User> user = userRepository.findOneByLogin(userLogin.get());
             booking.setUser(user.orElse(null));
         }
-        
+
         Booking result = bookingRepository.save(booking);
         return ResponseEntity.created(new URI("/api/bookings/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
