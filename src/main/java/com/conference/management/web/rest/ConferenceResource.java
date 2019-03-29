@@ -1,4 +1,5 @@
 package com.conference.management.web.rest;
+
 import com.conference.management.domain.AbstractAuditingEntity;
 import com.conference.management.domain.Conference;
 import com.conference.management.domain.User;
@@ -59,12 +60,10 @@ public class ConferenceResource extends AbstractAuditingEntity implements Serial
             throw new BadRequestAlertException("A new conference cannot already have an ID", ENTITY_NAME, "idexists");
         }
 
-        if (conference.getUser().equals(null)) {
-            Optional<String> userLogin = SecurityUtils.getCurrentUserLogin();
-            if (userLogin.isPresent()) {
-                Optional<User> user = userRepository.findOneByLogin(userLogin.get());
-                conference.setUser(user.orElse(null));
-            }
+        Optional<String> userLogin = SecurityUtils.getCurrentUserLogin();
+        if (userLogin.isPresent()) {
+            Optional<User> user = userRepository.findOneByLogin(userLogin.get());
+            conference.setUser(user.orElse(null));
         }
 
         Conference result = conferenceRepository.save(conference);

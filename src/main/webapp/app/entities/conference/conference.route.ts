@@ -1,16 +1,15 @@
 import { Injectable } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
-import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot, Routes } from '@angular/router';
+import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot, Routes } from '@angular/router';
 import { UserRouteAccessService } from 'app/core';
 import { Observable, of } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
-import { Conference } from 'app/shared/model/conference.model';
+import { Conference, IConference } from 'app/shared/model/conference.model';
 import { ConferenceService } from './conference.service';
 import { ConferenceComponent } from './conference.component';
 import { ConferenceDetailComponent } from './conference-detail.component';
 import { ConferenceUpdateComponent } from './conference-update.component';
 import { ConferenceDeletePopupComponent } from './conference-delete-dialog.component';
-import { IConference } from 'app/shared/model/conference.model';
 
 @Injectable({ providedIn: 'root' })
 export class ConferenceResolve implements Resolve<IConference> {

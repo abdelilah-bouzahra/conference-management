@@ -1,11 +1,15 @@
 package com.conference.management.web.rest;
 import com.conference.management.domain.Booking;
+import com.conference.management.domain.User;
 import com.conference.management.repository.BookingRepository;
+import com.conference.management.repository.UserRepository;
+import com.conference.management.security.SecurityUtils;
 import com.conference.management.web.rest.errors.BadRequestAlertException;
 import com.conference.management.web.rest.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,6 +32,9 @@ public class BookingResource {
 
     private final BookingRepository bookingRepository;
 
+    @Autowired
+    private UserRepository userRepository;
+
     public BookingResource(BookingRepository bookingRepository) {
         this.bookingRepository = bookingRepository;
     }
@@ -45,6 +52,13 @@ public class BookingResource {
         if (booking.getId() != null) {
             throw new BadRequestAlertException("A new booking cannot already have an ID", ENTITY_NAME, "idexists");
         }
+
+        Optional<String> userLogin = SecurityUtils.getCurrentUserLogin();
+        if (userLogin.isPresent()) {
+            Optional<User> user = userRepository.findOneByLogin(userLogin.get());
+            booking.setUser(user.orElse(null));
+        }
+        
         Booking result = bookingRepository.save(booking);
         return ResponseEntity.created(new URI("/api/bookings/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))

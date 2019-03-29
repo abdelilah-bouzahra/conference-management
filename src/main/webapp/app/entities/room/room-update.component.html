@@ -4,7 +4,7 @@
             <h2 id="jhi-room-heading" jhiTranslate="conferenceManagementApp.room.home.createOrEditLabel">Create or edit a Room</h2>
             <div>
                 <jhi-alert-error></jhi-alert-error>
-                <div class="form-group" [hidden]="!room.id">
+                <div *jhiHasAnyAuthority="'ROLE_ADMIN'" class="form-group" [hidden]="!room.id">
                     <label for="id" jhiTranslate="global.field.id">ID</label>
                     <input type="text" class="form-control" id="id" name="id"
                         [(ngModel)]="room.id" readonly />

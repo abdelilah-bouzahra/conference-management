@@ -1,4 +1,5 @@
 package com.conference.management.web.rest;
+
 import com.conference.management.domain.Article;
 import com.conference.management.domain.Authority;
 import com.conference.management.domain.User;
@@ -61,13 +62,12 @@ public class ArticleResource {
             throw new BadRequestAlertException("A new article cannot already have an ID", ENTITY_NAME, "idexists");
         }
 
-        if (article.getUser().equals(null)) {
-            Optional<String> userLogin = SecurityUtils.getCurrentUserLogin();
-            if (userLogin.isPresent()) {
-                Optional<User> user = userRepository.findOneByLogin(userLogin.get());
-                article.setUser(user.orElse(null));
-            }
+        Optional<String> userLogin = SecurityUtils.getCurrentUserLogin();
+        if (userLogin.isPresent()) {
+            Optional<User> user = userRepository.findOneByLogin(userLogin.get());
+            article.setUser(user.orElse(null));
         }
+
 
         Article result = articleRepository.save(article);
         return ResponseEntity.created(new URI("/api/articles/" + result.getId()))

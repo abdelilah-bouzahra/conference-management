@@ -73,13 +73,13 @@
 
 
                         <button *jhiHasAnyAuthority="'ROLE_USER'" type="submit"
-                                [routerLink]="['conference/participate']"
+                                [routerLink]="['/opinion/new']"
                                 class="btn btn-dark btn-sm">
                             <fa-icon [icon]="'comment-alt'"></fa-icon>
                             <span class="d-none d-md-inline" jhiTranslate="conferenceManagementApp.article.opinion">Avis</span>
                         </button>
                         <button *jhiHasAnyAuthority="'ROLE_USER'" type="submit"
-                                [routerLink]="['conference/participate']"
+                                [routerLink]="['/note/new']"
                                 class="btn btn-warning btn-sm">
                             <fa-icon [icon]="'sticky-note'"></fa-icon>
                             <span class="d-none d-md-inline">Note</span>

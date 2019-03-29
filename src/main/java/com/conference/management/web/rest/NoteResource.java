@@ -1,4 +1,5 @@
 package com.conference.management.web.rest;
+
 import com.conference.management.domain.Note;
 import com.conference.management.domain.User;
 import com.conference.management.repository.NoteRepository;
@@ -54,14 +55,11 @@ public class NoteResource {
             throw new BadRequestAlertException("A new note cannot already have an ID", ENTITY_NAME, "idexists");
         }
 
-        if (note.getUser().equals(null)) {
-            Optional<String> userLogin = SecurityUtils.getCurrentUserLogin();
-            if (userLogin.isPresent()) {
-                Optional<User> user = userRepository.findOneByLogin(userLogin.get());
-                note.setUser(user.orElse(null));
-            }
+        Optional<String> userLogin = SecurityUtils.getCurrentUserLogin();
+        if (userLogin.isPresent()) {
+            Optional<User> user = userRepository.findOneByLogin(userLogin.get());
+            note.setUser(user.orElse(null));
         }
-
 
         Note result = noteRepository.save(note);
         return ResponseEntity.created(new URI("/api/notes/" + result.getId()))

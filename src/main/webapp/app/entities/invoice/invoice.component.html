@@ -1,7 +1,7 @@
 <div>
     <h2 id="page-heading">
         <span jhiTranslate="conferenceManagementApp.invoice.home.title">Invoices</span>
-        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-invoice" [routerLink]="['/invoice/new']">
+        <button *jhiHasAnyAuthority="'ROLE_ADMIN'" id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-invoice" [routerLink]="['/invoice/new']">
             <fa-icon [icon]="'plus'"></fa-icon>
             <span  jhiTranslate="conferenceManagementApp.invoice.home.createLabel">
             Create new Invoice
@@ -14,7 +14,7 @@
         <table class="table table-striped">
             <thead>
             <tr>
-            <th><span jhiTranslate="global.field.id">ID</span></th>
+            <th *jhiHasAnyAuthority="'ROLE_ADMIN'"><span jhiTranslate="global.field.id">ID</span></th>
             <th><span jhiTranslate="conferenceManagementApp.invoice.dateInvoice">Date Invoice</span></th>
             <th><span jhiTranslate="conferenceManagementApp.invoice.sum">Sum</span></th>
             <th></th>
@@ -22,7 +22,7 @@
             </thead>
             <tbody>
             <tr *ngFor="let invoice of invoices ;trackBy: trackId">
-                <td><a [routerLink]="['/invoice', invoice.id, 'view' ]">{{invoice.id}}</a></td>
+                <td *jhiHasAnyAuthority="'ROLE_ADMIN'"><a [routerLink]="['/invoice', invoice.id, 'view' ]">{{invoice.id}}</a></td>
                 <td>{{invoice.dateInvoice | date:'medium'}}</td>
                 <td>{{invoice.sum}}</td>
                 <td class="text-right">
@@ -33,13 +33,13 @@
                             <fa-icon [icon]="'eye'"></fa-icon>
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
                         </button>
-                        <button type="submit"
+                        <button *jhiHasAnyAuthority="'ROLE_ADMIN'" type="submit"
                                 [routerLink]="['/invoice', invoice.id, 'edit']"
                                 class="btn btn-primary btn-sm">
                             <fa-icon [icon]="'pencil-alt'"></fa-icon>
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
                         </button>
-                        <button type="submit"
+                        <button *jhiHasAnyAuthority="'ROLE_ADMIN'" type="submit"
                                 [routerLink]="['/', 'invoice', { outlets: { popup: invoice.id + '/delete'} }]"
                                 replaceUrl="true"
                                 queryParamsHandling="merge"

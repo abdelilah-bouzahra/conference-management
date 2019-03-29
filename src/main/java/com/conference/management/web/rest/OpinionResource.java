@@ -1,11 +1,15 @@
 package com.conference.management.web.rest;
 import com.conference.management.domain.Opinion;
+import com.conference.management.domain.User;
 import com.conference.management.repository.OpinionRepository;
+import com.conference.management.repository.UserRepository;
+import com.conference.management.security.SecurityUtils;
 import com.conference.management.web.rest.errors.BadRequestAlertException;
 import com.conference.management.web.rest.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,6 +33,9 @@ public class OpinionResource {
 
     private final OpinionRepository opinionRepository;
 
+    @Autowired
+    private UserRepository userRepository;
+
     public OpinionResource(OpinionRepository opinionRepository) {
         this.opinionRepository = opinionRepository;
     }
@@ -46,6 +53,13 @@ public class OpinionResource {
         if (opinion.getId() != null) {
             throw new BadRequestAlertException("A new opinion cannot already have an ID", ENTITY_NAME, "idexists");
         }
+
+        Optional<String> userLogin = SecurityUtils.getCurrentUserLogin();
+        if (userLogin.isPresent()) {
+            Optional<User> user = userRepository.findOneByLogin(userLogin.get());
+            opinion.setUser(user.orElse(null));
+        }
+
         Opinion result = opinionRepository.save(opinion);
         return ResponseEntity.created(new URI("/api/opinions/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))

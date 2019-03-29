@@ -53,12 +53,10 @@ public class ParticipationResource {
             throw new BadRequestAlertException("A new participation cannot already have an ID", ENTITY_NAME, "idexists");
         }
 
-        if (participation.getUser().equals(null)) {
-            Optional<String> userLogin = SecurityUtils.getCurrentUserLogin();
-            if (userLogin.isPresent()) {
-                Optional<User> user = userRepository.findOneByLogin(userLogin.get());
-                participation.setUser(user.orElse(null));
-            }
+        Optional<String> userLogin = SecurityUtils.getCurrentUserLogin();
+        if (userLogin.isPresent()) {
+            Optional<User> user = userRepository.findOneByLogin(userLogin.get());
+            participation.setUser(user.orElse(null));
         }
 
         Participation result = participationRepository.save(participation);
