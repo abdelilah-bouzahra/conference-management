@@ -108,6 +108,12 @@ public class ArticleResource {
         return articleRepository.findByAcceptedAllWithEagerRelationships(true);
     }
 
+    @GetMapping("/articles/accepted")
+    public List<Article> getAllArticlesAccepted(@RequestParam(required = false, defaultValue = "false") boolean eagerload) {
+        log.debug("REST request to get all Articles");
+        return articleRepository.findByAcceptedAllWithEagerRelationships(false);
+    }
+
     /**
      * GET  /articles/:id : get the "id" article.
      *

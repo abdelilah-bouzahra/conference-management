@@ -94,7 +94,13 @@ public class ParticipationResource {
     @GetMapping("/participations")
     public List<Participation> getAllParticipations() {
         log.debug("REST request to get all Participations");
-        return participationRepository.findAll();
+        return participationRepository.findByAccepted(true);
+    }
+
+    @GetMapping("/participations/accepted")
+    public List<Participation> getAllParticipationsAccepted() {
+        log.debug("REST request to get all Participations");
+        return participationRepository.findByAccepted(false);
     }
 
     /**

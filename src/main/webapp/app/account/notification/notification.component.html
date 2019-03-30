@@ -1,0 +1,274 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="conferenceManagementApp.conference.home.title">Conferences</span>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <br/>
+    <div class="table-responsive" *ngIf="conferences">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th *jhiHasAnyAuthority="'ROLE_ADMIN'"><span jhiTranslate="global.field.id">ID</span></th>
+                <th><span jhiTranslate="conferenceManagementApp.conference.title">Title</span></th>
+                <th><span jhiTranslate="conferenceManagementApp.conference.description">Description</span></th>
+                <th><span jhiTranslate="conferenceManagementApp.conference.photo">Photo</span></th>
+                <th><span jhiTranslate="conferenceManagementApp.conference.address">Address</span></th>
+                <th><span jhiTranslate="conferenceManagementApp.conference.startDate">Start Date</span></th>
+                <th><span jhiTranslate="conferenceManagementApp.conference.endDate">End Date</span></th>
+                <th><span jhiTranslate="conferenceManagementApp.conference.user">User</span></th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let conference of conferences ;trackBy: trackId">
+                <td *jhiHasAnyAuthority="'ROLE_ADMIN'"><a
+                    [routerLink]="['/conference', conference.id, 'view' ]">{{conference.id}}</a></td>
+                <td>{{conference.title}}</td>
+                <td>{{conference.description}}</td>
+                <td>
+                    <a *ngIf="conference.photo" (click)="openFile(conference.photoContentType, conference.photo)">
+                        <img [src]="'data:' + conference.photoContentType + ';base64,' + conference.photo"
+                             style="max-height: 30px;" alt="conference image"/>
+                    </a>
+                    <span *ngIf="conference.photo">{{conference.photoContentType}}
+                        , {{byteSize(conference.photo)}}</span>
+                </td>
+                <td>{{conference.address}}</td>
+                <td>{{conference.startDate | date:'medium'}}</td>
+                <td>{{conference.endDate | date:'medium'}}</td>
+                <td>
+                    {{conference.user?.login}}
+                </td>
+
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <span *jhiHasAnyAuthority="'ROLE_ADMIN'">
+                        <button class="btn btn-danger btn-sm" (click)="setAcceptedConference(conference, true)"
+                                *ngIf="!conference.accepted">
+                            <fa-icon [icon]="'times-circle'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="conferenceManagementApp.conference.refused">Refused</span>
+                        </button>
+                        <button class="btn btn-success btn-sm" (click)="setAcceptedConference(conference, false)"
+                                *ngIf="conference.accepted">
+                            <fa-icon [icon]="'check-circle'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="conferenceManagementApp.conference.accepted">Accepted</span>
+                        </button>
+                        </span>
+                        <button *jhiHasAnyAuthority="'ROLE_USER'" type="submit"
+                                [routerLink]="['/participation/new']"
+                                class="btn btn-warning btn-sm">
+                            <fa-icon [icon]="'plus'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="conferenceManagementApp.conference.participate">Participate</span>
+                        </button>
+
+                        <button type="submit"
+                                [routerLink]="['/conference', conference.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button *jhiHasAnyAuthority="'ROLE_ADMIN'" type="submit"
+                                [routerLink]="['/conference', conference.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button *jhiHasAnyAuthority="'ROLE_ADMIN'" type="submit"
+                                [routerLink]="['/', 'conference', { outlets: { popup: conference.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div>
+    <h2 id="page-heading-article">
+        <span *jhiHasAnyAuthority="'ROLE_USER'"
+              jhiTranslate="conferenceManagementApp.article.home.title">Articles</span>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <br/>
+    <div class="table-responsive" *ngIf="articles">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th *jhiHasAnyAuthority="'ROLE_ADMIN'"><span jhiTranslate="global.field.id">ID</span></th>
+                <th><span jhiTranslate="conferenceManagementApp.article.title">Title</span></th>
+                <th><span jhiTranslate="conferenceManagementApp.article.summary">Summary</span></th>
+                <th><span jhiTranslate="conferenceManagementApp.article.file">File</span></th>
+                <th><span jhiTranslate="conferenceManagementApp.article.authors">Authors</span></th>
+                <th><span jhiTranslate="conferenceManagementApp.article.domain">Domain</span></th>
+                <th><span jhiTranslate="conferenceManagementApp.article.user">User</span></th>
+                <th><span jhiTranslate="conferenceManagementApp.article.conference">Conference</span></th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let article of articles ;trackBy: trackId">
+                <td *jhiHasAnyAuthority="'ROLE_ADMIN'"><a [routerLink]="['/article', article.id, 'view' ]">{{article.id}}</a></td>
+                <td>{{article.title}}</td>
+                <td>{{article.summary}}</td>
+                <td>
+                    <a *ngIf="article.file" (click)="openFile(article.fileContentType, article.file)"
+                       jhiTranslate="entity.action.open">open</a>
+                    <span *ngIf="article.file">{{article.fileContentType}}, {{byteSize(article.file)}}</span>
+                </td>
+                <td>
+                    <span *ngFor="let authors of article.authors; let last = last">
+                            {{authors.login}}{{last ? '' : ', '}}
+                        </span>
+                </td>
+                <td>
+                    <span *ngFor="let domain of article.domains; let last = last">
+                            <a class="form-control-static"
+                               [routerLink]="['../domain', domain?.id, 'view' ]">{{domain.name}}</a>{{last ? '' : ', '}}
+                        </span>
+                </td>
+                <td>
+                    {{article.user?.login}}
+                </td>
+                <td>
+                    <div *ngIf="article.conference">
+                        <a [routerLink]="['../conference', article.conference?.id, 'view' ]">{{article.conference?.title}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <span *jhiHasAnyAuthority="'ROLE_ADMIN'">
+                        <button class="btn btn-danger btn-sm" (click)="setAcceptedArticle(article, true)"
+                                *ngIf="!article.accepted">
+                            <fa-icon [icon]="'times-circle'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="conferenceManagementApp.article.refused">Refused</span>
+                        </button>
+                        <button class="btn btn-success btn-sm" (click)="setAcceptedArticle(article, false)"
+                                *ngIf="article.accepted">
+                            <fa-icon [icon]="'check-circle'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="conferenceManagementApp.article.accepted">Accepted</span>
+                        </button>
+                        </span>
+
+
+                        <button *jhiHasAnyAuthority="'ROLE_USER'" type="submit"
+                                [routerLink]="['/opinion/new']"
+                                class="btn btn-dark btn-sm">
+                            <fa-icon [icon]="'comment-alt'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="conferenceManagementApp.article.opinion">Avis</span>
+                        </button>
+                        <button *jhiHasAnyAuthority="'ROLE_USER'" type="submit"
+                                [routerLink]="['/note/new']"
+                                class="btn btn-warning btn-sm">
+                            <fa-icon [icon]="'sticky-note'"></fa-icon>
+                            <span class="d-none d-md-inline">Note</span>
+                        </button>
+
+
+                        <button type="submit"
+                                [routerLink]="['/article', article.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button *jhiHasAnyAuthority="'ROLE_USER'" type="submit"
+                                [routerLink]="['/article', article.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button *jhiHasAnyAuthority="'ROLE_ADMIN'" type="submit"
+                                [routerLink]="['/', 'article', { outlets: { popup: article.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div>
+    <h2 id="page-heading-participation">
+        <span jhiTranslate="conferenceManagementApp.participation.home.title">Participations</span>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <br/>
+    <div class="table-responsive" *ngIf="participations">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th *jhiHasAnyAuthority="'ROLE_ADMIN'"><span jhiTranslate="global.field.id">ID</span></th>
+                <th><span jhiTranslate="conferenceManagementApp.participation.conference">Conference</span></th>
+                <th><span jhiTranslate="conferenceManagementApp.participation.role">Role</span></th>
+                <th><span jhiTranslate="conferenceManagementApp.participation.user">User</span></th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let participation of participations ;trackBy: trackId">
+                <td *jhiHasAnyAuthority="'ROLE_ADMIN'"><a [routerLink]="['/participation', participation.id, 'view' ]">{{participation.id}}</a></td>
+                <td>
+                    <div *ngIf="participation.conference">
+                        <a [routerLink]="['../conference', participation.conference?.id, 'view' ]" >{{participation.conference?.title}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="participation.role">
+                        <a [routerLink]="['../role', participation.role?.id, 'view' ]" >{{participation.role?.roleName}}</a>
+                    </div>
+                </td>
+                <td>
+                    {{participation.user?.login}}
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <span *jhiHasAnyAuthority="'ROLE_ADMIN'">
+                        <button class="btn btn-danger btn-sm" (click)="setAcceptedParticipation(participation, true)"
+                                *ngIf="!participation.accepted">
+                            <fa-icon [icon]="'times-circle'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="conferenceManagementApp.conference.refused">Refused</span>
+                        </button>
+                        <button class="btn btn-success btn-sm" (click)="setAcceptedParticipation(participation, false)"
+                                *ngIf="participation.accepted">
+                            <fa-icon [icon]="'check-circle'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="conferenceManagementApp.conference.accepted">Accepted</span>
+                        </button>
+                        </span>
+                        <button type="submit"
+                                [routerLink]="['/participation', participation.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button *jhiHasAnyAuthority="'ROLE_ADMIN'" type="submit"
+                                [routerLink]="['/participation', participation.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button *jhiHasAnyAuthority="'ROLE_ADMIN'" type="submit"
+                                [routerLink]="['/', 'participation', { outlets: { popup: participation.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

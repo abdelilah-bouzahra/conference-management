@@ -1,8 +1,7 @@
 <div>
     <h2 id="page-heading">
-        <span *jhiHasAnyAuthority="'ROLE_USER'"
-              jhiTranslate="conferenceManagementApp.article.home.title">Articles</span>
-        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-article"
+        <span jhiTranslate="conferenceManagementApp.article.home.title">Articles</span>
+        <button *jhiHasAnyAuthority="'ROLE_USER'" id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-article"
                 [routerLink]="['/article/new']">
             <fa-icon [icon]="'plus'"></fa-icon>
             <span jhiTranslate="conferenceManagementApp.article.home.createLabel">
@@ -29,7 +28,8 @@
             </thead>
             <tbody>
             <tr *ngFor="let article of articles ;trackBy: trackId">
-                <td *jhiHasAnyAuthority="'ROLE_ADMIN'"><a [routerLink]="['/article', article.id, 'view' ]">{{article.id}}</a></td>
+                <td *jhiHasAnyAuthority="'ROLE_ADMIN'"><a
+                    [routerLink]="['/article', article.id, 'view' ]">{{article.id}}</a></td>
                 <td>{{article.title}}</td>
                 <td>{{article.summary}}</td>
                 <td>
@@ -76,7 +76,8 @@
                                 [routerLink]="['/opinion/new']"
                                 class="btn btn-dark btn-sm">
                             <fa-icon [icon]="'comment-alt'"></fa-icon>
-                            <span class="d-none d-md-inline" jhiTranslate="conferenceManagementApp.article.opinion">Avis</span>
+                            <span class="d-none d-md-inline"
+                                  jhiTranslate="conferenceManagementApp.article.opinion">Avis</span>
                         </button>
                         <button *jhiHasAnyAuthority="'ROLE_USER'" type="submit"
                                 [routerLink]="['/note/new']"

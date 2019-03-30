@@ -85,5 +85,6 @@ library.add(faCheckCircle);
 library.add(faTimesCircle);
 library.add(faStickyNote);
 library.add(faCommentAlt);
+library.add(faBell);
 
 // jhipster-needle-add-element-to-vendor - JHipster will add new menu items here

@@ -16,4 +16,8 @@ export * from './register/register.service';
 export * from './register/register.route';
 export * from './settings/settings.component';
 export * from './settings/settings.route';
+
+export * from './notification/notification.component';
+export * from './notification/notification.route';
+
 export * from './account.route';

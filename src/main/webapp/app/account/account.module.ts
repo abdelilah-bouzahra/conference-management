@@ -7,6 +7,7 @@ import {
     PasswordStrengthBarComponent,
     RegisterComponent,
     ActivateComponent,
+    NotificationComponent,
     PasswordComponent,
     PasswordResetInitComponent,
     PasswordResetFinishComponent,
@@ -18,6 +19,7 @@ import {
     imports: [ConferenceManagementSharedModule, RouterModule.forChild(accountState)],
     declarations: [
         ActivateComponent,
+        NotificationComponent,
         RegisterComponent,
         PasswordComponent,
         PasswordStrengthBarComponent,

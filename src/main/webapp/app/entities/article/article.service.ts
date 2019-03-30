@@ -32,6 +32,11 @@ export class ArticleService {
         return this.http.get<IArticle[]>(this.resourceUrl, { params: options, observe: 'response' });
     }
 
+    queryAccepted(req?: any): Observable<EntityArrayResponseType> {
+        const options = createRequestOption(req);
+        return this.http.get<IArticle[]>(this.resourceUrl.concat('/accepted'), { params: options, observe: 'response' });
+    }
+
     delete(id: number): Observable<HttpResponse<any>> {
         return this.http.delete<any>(`${this.resourceUrl}/${id}`, { observe: 'response' });
     }

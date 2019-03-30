@@ -104,6 +104,12 @@ public class ConferenceResource extends AbstractAuditingEntity implements Serial
         return conferenceRepository.findByAccepted(true);
     }
 
+    @GetMapping("/conferences/accepted")
+    public List<Conference> getAllConferencesAccepted() {
+        log.debug("REST request to get all Conferences");
+        return conferenceRepository.findByAccepted(false);
+    }
+
     /**
      * GET  /conferences/:id : get the "id" conference.
      *

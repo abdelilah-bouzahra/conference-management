@@ -1,11 +1,11 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Subscription } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
-import { JhiEventManager, JhiAlertService, JhiDataUtils } from 'ng-jhipster';
+import { JhiAlertService, JhiDataUtils, JhiEventManager } from 'ng-jhipster';
 
 import { IConference } from 'app/shared/model/conference.model';
-import { AccountService, User } from 'app/core';
+import { AccountService } from 'app/core';
 import { ConferenceService } from './conference.service';
 
 @Component({
