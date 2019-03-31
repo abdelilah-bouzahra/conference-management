@@ -43,7 +43,7 @@ export class OpinionUpdateComponent implements OnInit {
             )
             .subscribe((res: IUser[]) => (this.users = res), (res: HttpErrorResponse) => this.onError(res.message));
         this.articleService
-            .query()
+            .queryAll()
             .pipe(
                 filter((mayBeOk: HttpResponse<IArticle[]>) => mayBeOk.ok),
                 map((response: HttpResponse<IArticle[]>) => response.body)

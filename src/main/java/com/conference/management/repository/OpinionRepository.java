@@ -1,5 +1,6 @@
 package com.conference.management.repository;
 
+import com.conference.management.domain.Article;
 import com.conference.management.domain.Opinion;
 import org.springframework.data.jpa.repository.*;
 import org.springframework.stereotype.Repository;
@@ -15,5 +16,7 @@ public interface OpinionRepository extends JpaRepository<Opinion, Long> {
 
     @Query("select opinion from Opinion opinion where opinion.user.login = ?#{principal.username}")
     List<Opinion> findByUserIsCurrentUser();
+
+    long countByArticleAndType(Article article, boolean type);
 
 }

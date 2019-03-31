@@ -1,6 +1,7 @@
 package com.conference.management.web.rest;
 import com.conference.management.domain.Opinion;
 import com.conference.management.domain.User;
+import com.conference.management.repository.ArticleRepository;
 import com.conference.management.repository.OpinionRepository;
 import com.conference.management.repository.UserRepository;
 import com.conference.management.security.SecurityUtils;
@@ -36,6 +37,9 @@ public class OpinionResource {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private ArticleRepository articleRepository;
+
     public OpinionResource(OpinionRepository opinionRepository) {
         this.opinionRepository = opinionRepository;
     }
@@ -61,6 +65,15 @@ public class OpinionResource {
         }
 
         Opinion result = opinionRepository.save(opinion);
+
+        long countOpinions = opinionRepository.countByArticleAndType(opinion.getArticle(), true);
+        if (countOpinions >= 2) {
+            opinion.getArticle().setAccepted(true);
+        } else {
+            opinion.getArticle().setAccepted(false);
+        }
+        articleRepository.save(opinion.getArticle());
+
         return ResponseEntity.created(new URI("/api/opinions/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
             .body(result);
